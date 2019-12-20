@@ -1,0 +1,17 @@
+server:
+    port: 8082
+spring:
+    application:
+             name: movie-info-service
+    rabbitmq:
+          host: localhost
+          port: 5672
+          username: guest
+          password: guest          
+api:
+  key: 072d17d5d0c890586aa18d06792e14e8
+management:
+        endpoints: 
+               web: 
+                 exposure: 
+                         include: "*"  

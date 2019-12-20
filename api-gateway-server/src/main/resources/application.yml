@@ -1,0 +1,23 @@
+spring:
+     application:
+              name: api-gateway-service
+zuul:
+    routes:
+       movie-catalog:
+                  path: /movie_catalog/**
+                  serviceId: movie-catalog-service
+       movie-info:
+                path: /movie_info/**
+                serviceId: movie-info-service
+       ratings-data:
+                 path: /ratings_data/**
+                 serviceId: ratings-data-service      
+ribbon:
+    eureka:
+         enabled: true
+server:
+    port: 8084
+   
+
+                                          
+
