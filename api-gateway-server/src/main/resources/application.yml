@@ -1,6 +1,13 @@
 spring:
      application:
               name: api-gateway-service
+     logging:
+          level:
+             org:springframework:web: DEBUG
+             org:springframework:cloud:netflix:zuul: DEBUG
+     main:
+        allow-bean-definition-overriding: true        
+        
 zuul:
     routes:
        movie-catalog:
@@ -17,7 +24,8 @@ ribbon:
          enabled: true
 server:
     port: 8084
-   
+    
+  
 
                                           
 

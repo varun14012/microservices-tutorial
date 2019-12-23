@@ -3,6 +3,12 @@ server:
 spring:
     application:
              name: movie-info-service
+    logging:
+          level:
+             org.springframework.web: DEBUG
+             org.springframework.cloud.netflix.zuul: DEBUG
+    zipkin: 
+           base-url: http://localhost:8084/                        
     rabbitmq:
           host: localhost
           port: 5672

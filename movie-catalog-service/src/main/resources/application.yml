@@ -3,6 +3,11 @@ server:
 spring:
      application:
               name: movie-catalog-service
+     logging:
+          level:
+             org.springframework.web: DEBUG
+     zipkin: 
+           base-url: http://localhost:8084/          
      rabbitmq:
           host: localhost
           port: 5672
@@ -13,3 +18,4 @@ management:
                web: 
                  exposure: 
                          include: "*"
+                        
