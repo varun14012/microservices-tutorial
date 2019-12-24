@@ -5,9 +5,11 @@ spring:
           level:
              org:springframework:web: DEBUG
              org:springframework:cloud:netflix:zuul: DEBUG
-     main:
-        allow-bean-definition-overriding: true        
-        
+     zipkin: 
+           base-url: http://localhost:9411/
+     sleuth:
+          sampler: 
+             probability: 1      
 zuul:
     routes:
        movie-catalog:

@@ -8,6 +8,8 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import brave.sampler.Sampler;
+
 @SpringBootApplication
 @EnableEurekaClient
 @EnableZuulProxy
@@ -22,6 +24,11 @@ public class ApiGatewayServerApplication {
 	@LoadBalanced
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
+	}
+
+	@Bean
+	public Sampler alwaysSampler() {
+		return Sampler.ALWAYS_SAMPLE;
 	}
 
 }
