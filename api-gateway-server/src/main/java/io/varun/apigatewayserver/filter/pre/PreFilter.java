@@ -26,6 +26,13 @@ public class PreFilter extends ZuulFilter {
 		log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
 
 		return null;
+
+//		RequestContext ctx = RequestContext.getCurrentContext();
+//		HttpServletRequest request = ctx.getRequest();
+//		// Add a custom header in the request
+//		ctx.addZuulRequestHeader("Authorization", request.getHeader("Authorization"));
+//		log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
+//		return null;
 	}
 
 	@Override

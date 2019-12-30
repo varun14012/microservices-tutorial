@@ -1,4 +1,4 @@
-package io.varun.authserver.filter;
+package io.varun.apigatewayserver.filter;
 
 import java.io.IOException;
 
@@ -15,8 +15,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import io.varun.authserver.controller.auth.service.AuthUserDetailsService;
-import io.varun.authserver.controller.auth.util.JwtUtil;
+import io.varun.apigatewayserver.controller.auth.service.AuthUserDetailsService;
+import io.varun.apigatewayserver.controller.auth.util.JwtUtil;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {

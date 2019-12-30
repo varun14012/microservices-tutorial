@@ -1,4 +1,4 @@
-package io.varun.authserver.controller.auth.model;
+package io.varun.apigatewayserver.controller.auth.model;
 
 import java.io.Serializable;
 

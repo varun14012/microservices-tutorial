@@ -1,4 +1,4 @@
-package io.varun.authserver.controller.auth.service;
+package io.varun.apigatewayserver.controller.auth.service;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,6 @@ public class AuthUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-		return new User("user", "user@123", new ArrayList<>());
+		return new User("varun", "varun", new ArrayList<>());
 	}
 }

@@ -1,4 +1,4 @@
-package io.varun.authserver.controller.auth;
+package io.varun.apigatewayserver.controller.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.varun.authserver.controller.auth.model.AuthenticationRequest;
-import io.varun.authserver.controller.auth.model.AuthenticationResponse;
-import io.varun.authserver.controller.auth.service.AuthUserDetailsService;
-import io.varun.authserver.controller.auth.util.JwtUtil;
+import io.varun.apigatewayserver.controller.auth.model.AuthenticationRequest;
+import io.varun.apigatewayserver.controller.auth.model.AuthenticationResponse;
+import io.varun.apigatewayserver.controller.auth.service.AuthUserDetailsService;
+import io.varun.apigatewayserver.controller.auth.util.JwtUtil;
 
 @RestController
 public class AuthController {

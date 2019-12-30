@@ -1,4 +1,4 @@
-package io.varun.authserver.controller.auth.util;
+package io.varun.apigatewayserver.controller.auth.util;
 
 import java.util.Date;
 import java.util.HashMap;
