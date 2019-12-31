@@ -1,0 +1,57 @@
+server:
+    port: 8084
+spring:
+#     application:
+#              name: api-gateway-service
+     zipkin:
+#           enabled: false 
+           base-url: http://localhost:9411/
+               
+     sleuth:
+          sampler: 
+             probability: 1
+          traceId128: true
+                  
+     rabbitmq:
+          host: localhost
+          port: 5672
+          username: guest 
+          password: guest 
+logging:
+          level:
+             org:springframework:web: DEBUG
+             org:springframework:cloud:netflix:zuul: DEBUG
+          pattern:
+                  level: "%d{ABSOLUTE} [%X{X-B3-TraceId}/%X{X-B3-SpanId}] %-5p [%t] %C{2} - %m%n"                             
+zuul:
+    routes:
+#       auth-server:
+#                 path: /auth/**
+#                 serviceId: api-gateway-service        
+       movie-catalog:
+                  path: /movie_catalog/**
+                  serviceId: movie-catalog-service
+       movie-info:
+                path: /movie_info/**
+                serviceId: movie-info-service
+       ratings-data:
+                 path: /ratings_data/**
+                 serviceId: ratings-data-service
+                      
+ribbon:
+    eureka:
+         enabled: true
+management:
+        endpoints: 
+               web: 
+                 exposure: 
+                         include: "*"
+#jwt: 
+#   security:
+#         key: j3H5Ld5nYmGWyULy6xwpOgfSH++NgKXnJMq20vpfd+8=t  
+                      
+    
+  
+
+                                          
+
