@@ -1,0 +1,22 @@
+#server port
+server:
+   port: 8888
+# git repo location
+spring:
+    cloud:
+      config:
+          server: 
+              git:
+                uri: F:\\Projects\\microservices\\config-server-repo
+                cloneOnStart: true
+#                skipSslValidation: true
+#                username: varun14012
+#                password: Dream@9t
+    application:
+              name: cloud-config-server
+management:
+        endpoints: 
+               web: 
+                 exposure: 
+                         include: "*"
+

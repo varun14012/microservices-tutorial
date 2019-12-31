@@ -1,0 +1,17 @@
+spring:
+    application:
+           name: api-gateway-service
+ 
+#Active Profile - will relate to development properties file in the server. 
+#If this property is absent then,default profile will be activated which is 
+#the property file without any environment name at the end. 
+#spring.profiles.active=development
+# N.B. this is the default:
+    cloud:
+       config: 
+         uri: http://localhost:8888
+# path to properties from root of repo 
+#         server:
+#             git:
+#               searchPaths: configuration         
+         

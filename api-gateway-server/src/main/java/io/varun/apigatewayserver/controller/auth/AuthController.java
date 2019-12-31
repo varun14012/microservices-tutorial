@@ -17,6 +17,7 @@ import io.varun.apigatewayserver.controller.auth.service.AuthUserDetailsService;
 import io.varun.apigatewayserver.controller.auth.util.JwtUtil;
 
 @RestController
+//@RefreshScope
 public class AuthController {
 	@Autowired
 	private AuthenticationManager authenticationManager;

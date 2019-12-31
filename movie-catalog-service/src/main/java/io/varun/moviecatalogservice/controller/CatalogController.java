@@ -20,6 +20,7 @@ import io.varun.moviecatalogservice.model.UserRating;
 
 @RestController
 @RequestMapping("/catalog")
+//@RefreshScope
 public class CatalogController {
 	private static final Logger LOG = LoggerFactory.getLogger(CatalogController.class);
 

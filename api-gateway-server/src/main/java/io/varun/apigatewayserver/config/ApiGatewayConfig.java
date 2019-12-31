@@ -9,6 +9,7 @@ import io.varun.apigatewayserver.filter.pre.PreFilter;
 import io.varun.apigatewayserver.filter.route.RouteFilter;
 
 @Configuration
+//@ConfigurationProperties(prefix = "api-gateway-service")
 public class ApiGatewayConfig {
 
 	@Bean
