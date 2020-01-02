@@ -43,8 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/authenticate", "http://localhost:8761/")
-				.permitAll().anyRequest().authenticated().and().exceptionHandling().and().sessionManagement()
+		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/authenticate", "/actuator/**").permitAll()
+				.anyRequest().authenticated().and().exceptionHandling().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
