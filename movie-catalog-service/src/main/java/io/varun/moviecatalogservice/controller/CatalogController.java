@@ -36,7 +36,16 @@ public class CatalogController {
 			@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
 			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
 			@HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50"),
-			@HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000") })
+			@HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000") }, threadPoolProperties = {
+					@HystrixProperty(name = "coreSize", value = "30"),
+					@HystrixProperty(name = "maximumSize", value = "35"),
+					@HystrixProperty(name = "allowMaximumSizeToDivergeFromCoreSize", value = "true"),
+					@HystrixProperty(name = "maxQueueSize", value = "101"),
+					@HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
+					@HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "12"),
+					@HystrixProperty(name = "queueSizeRejectionThreshold", value = "15"),
+					@HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "1440") })
+
 	public List<CatalogItem> getCatalog(@PathVariable("user_id") String userId) {
 
 		UserRating userRating = restTemplate.getForObject("http://ratings-data-service/ratings/user/" + userId,
