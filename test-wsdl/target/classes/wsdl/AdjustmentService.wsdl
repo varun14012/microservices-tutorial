@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision$ $Date$-->
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://adjustment.ws.mcrewards.mastercard.com/"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://adjustment.ws.mcrewards.mastercard.com/"
+                  xmlns:common="http://common.ws.mcrewards.mastercard.com/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+  <wsdl:import location="MrsCommon.wsdl" namespace="http://common.ws.mcrewards.mastercard.com/" />
+
+  <wsdl:types>
+    <s:schema>
+      <s:import schemaLocation="AdjustmentService.xsd" namespace="http://adjustment.ws.mcrewards.mastercard.com/" />
+    </s:schema>
+  </wsdl:types>
+
+
+  <!-- MESSAGES -->
+  <wsdl:message name="adjustPointsSoapIn">
+    <wsdl:part name="parameters" element="tns:adjustPoints"/>
+  </wsdl:message>
+
+  <wsdl:message name="adjustPointsSoapOut">
+    <wsdl:part name="parameters" element="tns:adjustPointsResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="getAdjustmentClassSoapIn" />
+
+  <wsdl:message name="getAdjustmentClassSoapOut">
+    <wsdl:part name="parameters" element="tns:adjustmentClassResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="getAdjustmentTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:adjustmentClassCode"/>
+  </wsdl:message>
+
+  <wsdl:message name="getAdjustmentTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:adjustmentTypeResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="adjustAccountPointsSoapIn">
+    <wsdl:part name="parameters" element="tns:adjustAccountPoints"/>
+  </wsdl:message>
+
+  <wsdl:message name="adjustAccountPointsSoapOut">
+    <wsdl:part name="parameters" element="tns:adjustAccountPointsResponse"/>
+  </wsdl:message>
+  <!-- PORTS -->
+  <wsdl:portType name="AdjustmentService">
+    <wsdl:operation name="adjustPoints">
+      <wsdl:input message="tns:adjustPointsSoapIn"/>
+      <wsdl:output message="tns:adjustPointsSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="getAdjustmentClasses">
+      <wsdl:input message="tns:getAdjustmentClassSoapIn"/>
+      <wsdl:output message="tns:getAdjustmentClassSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="getAdjustmentTypes">
+      <wsdl:input message="tns:getAdjustmentTypesSoapIn"/>
+      <wsdl:output message="tns:getAdjustmentTypesSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    
+    <wsdl:operation name="adjustAccountPoints">
+      <wsdl:input message="tns:adjustAccountPointsSoapIn"/>
+      <wsdl:output message="tns:adjustAccountPointsSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+
+  <!-- BINDINGS -->
+  <wsdl:binding name="AdjustmentService"
+                type="tns:AdjustmentService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="adjustPoints">
+      <soap:operation
+              soapAction="http://adjustment.ws.mcrewards.mastercard.com/adjustPoints"
+              style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getAdjustmentClasses">
+      <soap:operation
+              soapAction="http://adjustment.ws.mcrewards.mastercard.com/getAdjustmentClasses"
+              style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+  <wsdl:operation name="getAdjustmentTypes">
+      <soap:operation
+              soapAction="http://adjustment.ws.mcrewards.mastercard.com/getAdjustmentTypes"
+              style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    
+    <wsdl:operation name="adjustAccountPoints">
+      <soap:operation
+              soapAction="http://adjustment.ws.mcrewards.mastercard.com/adjustAccountPoints"
+              style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="AdjustmentService">
+    <wsdl:port name="AdjustmentService" binding="tns:AdjustmentService">
+      <soap:address location="http://localhost:8080/mrswebservices/AdjustmentService"/>
+      <!-- DEV -->
+      <!-- <soap:address location="https://10.158.130.219:25027/mrswebservices/AdjustmentService"/> -->
+      <!-- STAGE -->
+      <!-- <soap:address location="https://10.157.251.57:25027/mrswebservices/AdjustmentService"/> -->
+    </wsdl:port>
+
+  </wsdl:service>
+</wsdl:definitions>

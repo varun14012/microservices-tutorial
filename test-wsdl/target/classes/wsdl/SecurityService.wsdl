@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision$ $Date$-->
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://security.ws.mcrewards.mastercard.com/"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:common="http://common.ws.mcrewards.mastercard.com/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  targetNamespace="http://security.ws.mcrewards.mastercard.com/">
+
+  <wsdl:import location="MrsCommon.wsdl" namespace="http://common.ws.mcrewards.mastercard.com/" />
+
+  <wsdl:types>
+    <s:schema>
+      <s:import schemaLocation="SecurityService.xsd" namespace="http://security.ws.mcrewards.mastercard.com/" />
+    </s:schema>
+  </wsdl:types>
+
+  <!-- MESSAGES -->
+  <wsdl:message name="validateCSRTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:validateCSRToken"/>
+  </wsdl:message>
+
+  <wsdl:message name="validateCSRTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:validateCSRTokenResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="confirmPartnerRegistrationSoapIn">
+    <wsdl:part name="parameters" element="tns:confirmPartnerRegistration"/>
+  </wsdl:message>
+
+  <wsdl:message name="confirmPartnerRegistrationSoapOut">
+    <wsdl:part name="parameters" element="tns:confirmPartnerRegistrationResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="confirmJitRegistrationSoapIn">
+    <wsdl:part name="parameters" element="tns:confirmJitRegistration"/>
+  </wsdl:message>
+
+  <wsdl:message name="confirmJitRegistrationSoapOut">
+    <wsdl:part name="parameters" element="tns:confirmJitRegistrationResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="getCompanySecurityGroupsIn">
+    <wsdl:part name="parameters" element="tns:getCompanySecurityGroups"/>
+  </wsdl:message>
+
+  <wsdl:message name="getCompanySecurityGroupsOut">
+    <wsdl:part name="parameters" element="tns:CompanySecurityGroups"/>
+  </wsdl:message>
+
+  <wsdl:message name="getRedemptionCentersIn">
+    <wsdl:part name="parameters" element="tns:getRedemptionCenters"/>
+  </wsdl:message>
+
+  <wsdl:message name="getRedemptionCentersOut">
+    <wsdl:part name="parameters" element="tns:RedemptionCenters"/>
+  </wsdl:message>
+
+  <wsdl:message name="getMRSLanguagesIn" />
+
+  <wsdl:message name="getMRSLanguagesOut">
+    <wsdl:part name="parameters" element="tns:MRSLanguages"/>
+  </wsdl:message>
+
+  <wsdl:message name="getSAMLAttributesIn">
+    <wsdl:part name="parameters" element="tns:getSAMLAttributes"/>
+  </wsdl:message>
+
+  <wsdl:message name="getSAMLAttributesOut">
+    <wsdl:part name="parameters" element="tns:attributes"/>
+  </wsdl:message>
+  
+  <wsdl:message name="getFirstRegisteredLdapIdIn">
+    <wsdl:part name="parameters" element="tns:getFirstRegisteredLdapId"/>
+  </wsdl:message>
+
+  <wsdl:message name="getFirstRegisteredLdapIdOut">
+    <wsdl:part name="parameters" element="tns:firstRegisteredLdapId"/>
+  </wsdl:message>
+  
+  <!-- MrsEupAdapter Messages -->
+  <wsdl:message name="gaCreateIn">
+    <wsdl:part name="parameters" element="tns:GACreate"></wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="gaCreateOut">
+    <wsdl:part name="response" element="tns:GAResponse"></wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="gaModifyIn">
+    <wsdl:part name="parameters" element="tns:GAModify"></wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="gaModifyOut">
+    <wsdl:part name="response" element="tns:GAResponse"></wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="gaDeleteIn">
+    <wsdl:part name="parameters" element="tns:GADelete"></wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="gaDeleteOut">
+    <wsdl:part name="response" element="tns:GAResponse"></wsdl:part>
+  </wsdl:message>
+
+  <!-- PORTS -->
+  <wsdl:portType name="SecurityService">
+    <wsdl:operation name="validateCSRToken">
+      <wsdl:input message="tns:validateCSRTokenSoapIn"/>
+      <wsdl:output message="tns:validateCSRTokenSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="confirmPartnerRegistration">
+      <wsdl:input message="tns:confirmPartnerRegistrationSoapIn"/>
+      <wsdl:output message="tns:confirmPartnerRegistrationSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="confirmJitRegistration">
+      <wsdl:input message="tns:confirmJitRegistrationSoapIn"/>
+      <wsdl:output message="tns:confirmJitRegistrationSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="getCompanySecurityGroups">
+      <wsdl:input message="tns:getCompanySecurityGroupsIn"/>
+      <wsdl:output message="tns:getCompanySecurityGroupsOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="getRedemptionCenters">
+      <wsdl:input message="tns:getRedemptionCentersIn"/>
+      <wsdl:output message="tns:getRedemptionCentersOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="getMRSLanguages">
+      <wsdl:input message="tns:getMRSLanguagesIn"/>
+      <wsdl:output message="tns:getMRSLanguagesOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="getSAMLAttributes">
+      <wsdl:input message="tns:getSAMLAttributesIn"/>
+      <wsdl:output message="tns:getSAMLAttributesOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    
+    <wsdl:operation name="getFirstRegisteredLdapId">
+      <wsdl:input message="tns:getFirstRegisteredLdapIdIn"/>
+      <wsdl:output message="tns:getFirstRegisteredLdapIdOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    
+    <!-- MrsEupAdapter Operations -->
+    <wsdl:operation name="gaCreate">
+      <wsdl:input message="tns:gaCreateIn"/>
+      <wsdl:output message="tns:gaCreateOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="gaModify">
+      <wsdl:input message="tns:gaModifyIn"/>
+      <wsdl:output message="tns:gaModifyOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="gaDelete">
+      <wsdl:input message="tns:gaDeleteIn"/>
+      <wsdl:output message="tns:gaDeleteOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <!-- BINDINGS -->
+  <wsdl:binding name="SecurityService" type="tns:SecurityService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+    <wsdl:operation name="validateCSRToken">
+      <soap:operation soapAction="http://security.ws.mcrewards.mastercard.com/validateCSRToken"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="confirmPartnerRegistration">
+      <soap:operation soapAction="http://security.ws.mcrewards.mastercard.com/confirmPartnerRegistration"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="confirmJitRegistration">
+      <soap:operation soapAction="http://security.ws.mcrewards.mastercard.com/confirmJitRegistration"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getCompanySecurityGroups">
+      <soap:operation soapAction="http://security.ws.mcrewards.mastercard.com/getCompanySecurityGroups"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getRedemptionCenters">
+      <soap:operation soapAction="http://security.ws.mcrewards.mastercard.com/getRedemptionCenters"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getMRSLanguages">
+      <soap:operation soapAction="http://security.ws.mcrewards.mastercard.com/getMRSLanguages"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getSAMLAttributes">
+      <soap:operation soapAction="http://security.ws.mcrewards.mastercard.com/getSAMLAttributes"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    
+    <wsdl:operation name="getFirstRegisteredLdapId">
+      <soap:operation soapAction="http://security.ws.mcrewards.mastercard.com/getFirstRegisteredLdapId"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    
+    <wsdl:operation name="gaCreate">
+      <soap:operation soapAction="http://security.ws.mcrewards.mastercard.com/gaCreate"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="gaModify">
+      <soap:operation soapAction="http://security.ws.mcrewards.mastercard.com/gaModify"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="gaDelete">
+      <soap:operation soapAction="http://security.ws.mcrewards.mastercard.com/gaDelete"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+
+
+  <wsdl:service name="SecurityService">
+    <wsdl:port name="SecurityService" binding="tns:SecurityService">
+      <soap:address location="http://localhost:8080/mrswebservices/SecurityService"/>
+      <!--
+           MRS DEV
+           <soap:address location="https://10.158.130.219:25027/mrswebservices/SecurityService"/>
+
+           ESB DEV
+           <soap:address location="https://dev.dp.stl.mastercard.int/mrswebservices/SecurityService/b2c/v1"/>
+           <soap:address location="https://dev.dp.stl.mastercard.int/mrswebservices/SecurityService/b2b/v1"/>
+
+           ESB STAGE
+           <soap:address location="https://stage.dp.stl.mastercard.int/mrswebservices/SecurityService/b2c/v1"/>
+           <soap:address location="https://stage.dp.stl.mastercard.int/mrswebservices/SecurityService/b2b/v1"/>
+
+           ESB MTF
+           <soap:address location="https://prod.dp.stl.mastercard.int/mtf/mrswebservices/SecurityService/b2c/v1"/>
+           <soap:address location="https://prod.dp.stl.mastercard.int/mtf/mrswebservices/SecurityService/b2b/v1"/>
+
+           ESB PROD
+           <soap:address location="https://prod.dp.stl.mastercard.int/mrswebservices/SecurityService/b2c/v1"/>
+           <soap:address location="https://prod.dp.stl.mastercard.int/mrswebservices/SecurityService/b2b/v1"/>
+      -->
+    </wsdl:port>
+
+  </wsdl:service>
+</wsdl:definitions>

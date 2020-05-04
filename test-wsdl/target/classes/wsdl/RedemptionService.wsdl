@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision$ $Date$-->
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://redemption.ws.mcrewards.mastercard.com/"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://redemption.ws.mcrewards.mastercard.com/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:common="http://common.ws.mcrewards.mastercard.com/">
+
+  <wsdl:import location="MrsCommon.wsdl" namespace="http://common.ws.mcrewards.mastercard.com/" />
+
+  <wsdl:types>
+    <s:schema>
+      <s:import schemaLocation="RedemptionService.xsd" namespace="http://redemption.ws.mcrewards.mastercard.com/" />
+    </s:schema>
+  </wsdl:types>
+
+  <!-- MESSAGES -->
+  <wsdl:message name="doItemRedemptionSoapIn">
+    <wsdl:part name="parameters" element="tns:doItemRedemption"/>
+  </wsdl:message>
+
+  <wsdl:message name="doItemRedemptionSoapOut">
+    <wsdl:part name="parameters" element="tns:doItemRedemptionResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="statementOfCreditSoapIn">
+    <wsdl:part name="parameters" element="tns:applyStatementOfCredit"></wsdl:part>
+  </wsdl:message>
+  
+  <wsdl:message name="statementOfCreditSoapOut">
+    <wsdl:part name="parameters" element="tns:applyStatementOfCreditResponse"></wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="creditTravelRedemptionSoapIn">
+    <wsdl:part name="parameters" element="tns:creditTravelRedemption"/>
+  </wsdl:message>
+
+  <wsdl:message name="creditTravelRedemptionSoapOut">
+    <wsdl:part name="parameters" element="tns:creditTravelRedemptionResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="creditRedemptionSoapIn">
+    <wsdl:part name="parameters" element="tns:creditRedemption"/>
+  </wsdl:message>
+
+  <wsdl:message name="creditRedemptionSoapOut">
+    <wsdl:part name="parameters" element="tns:creditRedemptionResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="doTravelRedemptionSoapIn">
+    <wsdl:part name="parameters" element="tns:doTravelRedemption"/>
+  </wsdl:message>
+
+  <wsdl:message name="doTravelRedemptionSoapOut">
+    <wsdl:part name="parameters" element="tns:travelRedemptionResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="getEligibleCashbackRedemptionAccountsSoapIn">
+    <wsdl:part name="parameters" element="tns:getEligibleCashbackRedemptionAccounts"/>
+  </wsdl:message>
+
+  <wsdl:message name="getEligibleCashbackRedemptionAccountsSoapOut">
+    <wsdl:part name="parameters" element="tns:EligibleCashbackRedemptionAccounts"/>
+  </wsdl:message>
+
+  <wsdl:message name="getDefaultCashbackRedemptionAccountsSoapIn">
+    <wsdl:part name="parameters" element="tns:getDefaultCashbackRedemptionAccount"/>
+  </wsdl:message>
+
+  <wsdl:message name="getDefaultCashbackRedemptionAccountsSoapOut">
+    <wsdl:part name="parameters" element="tns:defaultCashbackRedemptionAccount"/>
+  </wsdl:message>
+
+  <wsdl:message name="setDefaultCashbackRedemptionAccountsSoapIn">
+    <wsdl:part name="parameters" element="tns:setDefaultCashbackRedemptionAccount"/>
+  </wsdl:message>
+
+  <wsdl:message name="setDefaultCashbackRedemptionAccountsSoapOut">
+    <wsdl:part name="parameters" element="tns:setDefaultCashbackRedemptionAccountResult"/>
+  </wsdl:message>
+
+  <wsdl:message name="externalItemRedemptionSoapIn">
+    <wsdl:part name="parameters" element="tns:externalItemRedemption"/>
+  </wsdl:message>
+
+  <wsdl:message name="externalItemRedemptionSoapOut">
+    <wsdl:part name="parameters" element="tns:externalItemRedemptionResponse"/>
+  </wsdl:message>
+
+  <!-- PORTS -->
+  <wsdl:portType name="RedemptionService">
+    <wsdl:operation name="doItemRedemption">
+      <wsdl:input message="tns:doItemRedemptionSoapIn"/>
+      <wsdl:output message="tns:doItemRedemptionSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="statementOfCredit">
+      <wsdl:input message="tns:statementOfCreditSoapIn"/>
+      <wsdl:output message="tns:statementOfCreditSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>  
+    <wsdl:operation name="creditTravelRedemption">
+      <wsdl:input message="tns:creditTravelRedemptionSoapIn"/>
+      <wsdl:output message="tns:creditTravelRedemptionSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="creditRedemption">
+      <wsdl:input message="tns:creditRedemptionSoapIn"/>
+      <wsdl:output message="tns:creditRedemptionSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="doTravelRedemption">
+      <wsdl:input message="tns:doTravelRedemptionSoapIn"/>
+      <wsdl:output message="tns:doTravelRedemptionSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getEligibleCashbackRedemptionAccounts">
+      <wsdl:input message="tns:getEligibleCashbackRedemptionAccountsSoapIn"/>
+      <wsdl:output message="tns:getEligibleCashbackRedemptionAccountsSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getDefaultCashbackRedemptionAccount">
+      <wsdl:input message="tns:getDefaultCashbackRedemptionAccountsSoapIn"/>
+      <wsdl:output message="tns:getDefaultCashbackRedemptionAccountsSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="setDefaultCashbackRedemptionAccount">
+      <wsdl:input message="tns:setDefaultCashbackRedemptionAccountsSoapIn"/>
+      <wsdl:output message="tns:setDefaultCashbackRedemptionAccountsSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="externalItemRedemption">
+      <wsdl:input message="tns:externalItemRedemptionSoapIn"/>
+      <wsdl:output message="tns:externalItemRedemptionSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <!-- BINDINGS -->
+  <wsdl:binding name="RedemptionService" type="tns:RedemptionService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="doItemRedemption">
+      <soap:operation soapAction="http://redemption.ws.mcrewards.mastercard.com/doItemRedemption" style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    
+    <wsdl:operation name="statementOfCredit">
+      <soap:operation soapAction="http://redemption.ws.mcrewards.mastercard.com/statementOfCredit" style="document"/>
+      <wsdl:input>
+      	<soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="creditTravelRedemption">
+      <soap:operation soapAction="http://redemption.ws.mcrewards.mastercard.com/creditTravelRedemption" style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="creditRedemption">
+      <soap:operation soapAction="http://redemption.ws.mcrewards.mastercard.com/creditRedemption" style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="doTravelRedemption">
+      <soap:operation soapAction="http://redemption.ws.mcrewards.mastercard.com/doTravelRedemption" style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getEligibleCashbackRedemptionAccounts">
+      <soap:operation soapAction="http://redemption.ws.mcrewards.mastercard.com/getEligibleCashbackRedemptionAccounts" style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getDefaultCashbackRedemptionAccount">
+      <soap:operation soapAction="http://redemption.ws.mcrewards.mastercard.com/getDefaultCashbackRedemptionAccount" style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="setDefaultCashbackRedemptionAccount">
+      <soap:operation soapAction="http://redemption.ws.mcrewards.mastercard.com/setDefaultCashbackRedemptionAccount" style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="externalItemRedemption">
+      <soap:operation soapAction="http://redemption.ws.mcrewards.mastercard.com/externalItemRedemption" style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+  </wsdl:binding>
+
+  <wsdl:service name="RedemptionService">
+    <wsdl:port name="RedemptionService" binding="tns:RedemptionService">
+      <soap:address location="http://localhost:8080/mrswebservices/RedemptionService"/>
+      <!-- DEV -->
+      <!-- <soap:address location="https://10.158.130.219:25027/mrswebservices/RedemptionService"/> -->
+      <!-- STAGE -->
+      <!-- <soap:address location="https://10.157.251.57:25027/mrswebservices/RedemptionService"/>  -->
+      <!-- STAGE instance #2-->
+      <!-- <soap:address location="https://10.157.251.57:25027/mrswebservices_v2/RedemptionService"/>  -->
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

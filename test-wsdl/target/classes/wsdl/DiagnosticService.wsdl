@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision$ $Date$-->
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://diagnostic.ws.mcrewards.mastercard.com/"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://diagnostic.ws.mcrewards.mastercard.com/"
+                  xmlns:common="http://common.ws.mcrewards.mastercard.com/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+  <wsdl:import location="MrsCommon.wsdl" namespace="http://common.ws.mcrewards.mastercard.com/" />
+
+  <wsdl:types>
+    <s:schema>
+      <s:import schemaLocation="DiagnosticService.xsd" namespace="http://diagnostic.ws.mcrewards.mastercard.com/" />
+    </s:schema>
+  </wsdl:types>
+
+  <wsdl:message name="doEchoRequest">
+    <wsdl:part element="tns:doEcho" name="parameters"/>
+  </wsdl:message>
+
+  <wsdl:message name="doEchoResponse">
+    <wsdl:part element="tns:doEchoResponse" name="parameters"/>
+  </wsdl:message>
+
+  <wsdl:message name="getCurrentVersionRequest">
+    <wsdl:part name="getCurrentVersion" element="tns:getCurrentVersion" />
+  </wsdl:message>
+
+  <wsdl:message name="getCurrentVersionResponse">
+  	<wsdl:part name="version" element="tns:CurrentVersion"></wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="getApplicationStatusRequest">
+    <wsdl:part name="getApplicationStatus" element="tns:getApplicationStatus" />
+  </wsdl:message>
+
+  <wsdl:message name="getApplicationStatusResponse">
+    <wsdl:part name="status" element="tns:ApplicationStatus"></wsdl:part>
+  </wsdl:message>
+
+  <wsdl:portType name="DiagnosticService">
+    <wsdl:operation name="doEcho">
+      <wsdl:input message="tns:doEchoRequest"/>
+      <wsdl:output message="tns:doEchoResponse"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="getCurrentVersion">
+      <wsdl:input message="tns:getCurrentVersionRequest"/>
+      <wsdl:output message="tns:getCurrentVersionResponse"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="getApplicationStatus">
+      <wsdl:input message="tns:getApplicationStatusRequest"/>
+      <wsdl:output message="tns:getApplicationStatusResponse"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+
+
+  <wsdl:binding name="DiagnosticService" type="tns:DiagnosticService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="doEcho">
+      <soap:operation soapAction="http://diagnostic.ws.mcrewards.mastercard.com/doEcho"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getCurrentVersion">
+      <soap:operation soapAction="http://diagnostic.ws.mcrewards.mastercard.com/getCurrentVersion"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getApplicationStatus">
+      <soap:operation soapAction="http://diagnostic.ws.mcrewards.mastercard.com/getApplicationStatus"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+
+
+  <wsdl:service name="DiagnosticService">
+    <wsdl:port binding="tns:DiagnosticService" name="DiagnosticService">
+      <soap:address location="http://localhost:8080/mrswebservices/DiagnosticService"/>
+      <!-- DEV -->
+      <!-- <soap:address location="https://10.158.130.219:25027/mrswebservices/DiagnosticService"/> -->
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,1524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision$  $Date$ -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:s="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://activity.ws.mcrewards.mastercard.com/"
+        xmlns:tns="http://activity.ws.mcrewards.mastercard.com/"
+        xmlns:common="http://common.ws.mcrewards.mastercard.com/"
+        elementFormDefault="qualified">
+
+  <s:import schemaLocation="CommonResponses.xsd" namespace="http://common.ws.mcrewards.mastercard.com/" />
+
+  <s:element name="getRewardSummary">
+    <s:complexType>
+      <s:sequence>
+        <s:element minOccurs="0" name="householdId" type="s:long"/>
+        <s:element name="fromDate" nillable="true" type="s:date"/>
+        <s:element name="toDate" nillable="true" type="s:date"/>
+        <s:element name="excludeAcctsNotBelongingToCustomerSw" type="s:boolean"/>
+        <s:element minOccurs="0" name="language" type="s:string"/>
+        <s:element maxOccurs="unbounded" name="rewardSummaryComponent" type="tns:RewardSummaryComponent"/>
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+  
+  <s:simpleType name="RewardSummaryComponent">
+    <s:restriction base="s:string">
+      <s:enumeration value="adjustment" />
+      <s:enumeration value="expiration" />
+      <s:enumeration value="household" />
+      <s:enumeration value="redemption" />
+      <s:enumeration value="transaction" />
+    </s:restriction>
+  </s:simpleType>
+
+  <s:element name="getRewardSummaryResponse">
+    <s:complexType>
+      <s:sequence>
+      <s:element minOccurs="0" name="referenceId" type="s:string"/>
+      <s:element minOccurs="0" maxOccurs="unbounded" name="household" type="tns:HouseholdPoints"/>
+      <s:element minOccurs="0" maxOccurs="unbounded" name="accumulationDetailAccounts" type="tns:AccumulationDetailAccount"/>
+      <s:element minOccurs="0" maxOccurs="unbounded" name="adjustmentAccounts" type="tns:AdjustmentAccount"/>
+      <s:element minOccurs="0" maxOccurs="unbounded" name="redemptionAccounts" type="tns:RedemptionAccount"/>
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+
+  <s:complexType name="HouseholdPoints">
+    <s:sequence>
+      <s:element minOccurs="0" name="householdId" type="s:long"/>
+      <s:element minOccurs="0" name="householdRedeemerCode" type="s:string"/>
+      <s:element minOccurs="0" name="householdName" type="s:string"/>
+      <s:element minOccurs="0" name="previousPointBalance" type="s:decimal"/>
+      <s:element minOccurs="0" name="pointsEarned" type="s:decimal"/>
+      <s:element minOccurs="0" name="pointsAvailable" type="s:decimal"/>
+      <s:element minOccurs="0" name="pointsRedeemed" type="s:decimal"/>
+      <s:element minOccurs="0" name="lifePointsEarned" type="s:decimal"/>
+      <s:element minOccurs="0" name="lifePointsRedeemed" type="s:decimal"/>
+      <s:element minOccurs="0" name="ytdPointsEarned" type="s:decimal"/>
+      <s:element minOccurs="0" name="ytdPointsRedeemed" type="s:decimal"/>
+      <s:element minOccurs="0" maxOccurs="unbounded" name="householdPointsExpire" type="tns:HouseholdPointExpire"/>
+      <s:element minOccurs="0" name="expiredLifetimePoints" type="s:decimal"/>
+      <s:element minOccurs="0" name="expiredYearToDatePoints" type="s:decimal"/>
+      <s:element minOccurs="0" name="pointAgingRule" type="s:int"/>
+      <s:element minOccurs="0" name="pointAgingPeriod" type="s:int"/>
+      <s:element minOccurs="0" name="pointExpirationMethod" type="s:string"/>
+    </s:sequence>
+  </s:complexType>
+
+  <s:complexType name="HouseholdPointExpire">
+    <s:sequence>
+      <s:element minOccurs="1" name="expirationDate" type="s:date"/>
+      <s:element minOccurs="1" name="pointsQty" type="s:decimal"/>
+    </s:sequence>
+  </s:complexType>
+
+  <s:complexType name="AccumulationDetailAccount">
+    <s:complexContent mixed="false">
+      <s:extension base="tns:Account">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="accumulationDetails" type="tns:AccumulationDetail"/>
+        </s:sequence>
+      </s:extension>
+    </s:complexContent>
+  </s:complexType>
+
+  <s:complexType name="Account">
+    <s:sequence>
+      <s:element minOccurs="0" name="householdId" type="s:string"/>
+      <s:element minOccurs="0" name="accountId" type="s:string"/>
+      <s:element minOccurs="0" name="last4BankAccountNumber" type="s:string"/>
+      <s:element minOccurs="0" name="bankAccountNumber" type="s:string"/>
+      <s:element minOccurs="0" name="enrollmentDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="ddaAccountNumber" type="s:string"/>
+      <s:element minOccurs="0" name="ddaAccountNumberUpdateDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="customerIdentifier" type="s:boolean"/>
+      <s:element minOccurs="0" name="bankProductCode" type="s:string"/>
+      <s:element minOccurs="0" name="bankProductName" type="s:string"/>
+      <s:element minOccurs="0" name="bankProductSegment" type="s:string"/>
+      <s:element minOccurs="0" name="bankProductSegmentRank" type="s:int"/>
+      <s:element minOccurs="0" name="mastercardProductCode" type="s:string"/>
+      <s:element minOccurs="0" name="productTypeName" type="s:string"/>
+    </s:sequence>
+  </s:complexType>
+
+  <s:complexType name="RedemptionAccount">
+    <s:complexContent mixed="false">
+      <s:extension base="tns:Account">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="redemptions" type="tns:Redemption"/>
+        </s:sequence>
+      </s:extension>
+    </s:complexContent>
+  </s:complexType>
+
+  <s:complexType name="Redemption">
+    <s:sequence>
+      <s:element minOccurs="0" name="redemptionDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="redemptionDescription" type="s:string"/>
+      <s:element minOccurs="0" name="pointsRedeemed" type="s:decimal"/>
+      <s:element minOccurs="0" name="redemptionId" type="s:decimal"/>
+      <s:element minOccurs="0" name="referenceNumber" type="s:string"/>
+      <s:element minOccurs="0" name="redemptionItemDescription" type="s:string"/>
+      <s:element minOccurs="0" name="sourceItemId" type="s:string"/>
+      <s:element minOccurs="0" name="sourceItemCode" type="s:string"/>
+      <s:element minOccurs="0" name="rewardMatrixId" type="s:decimal"/>
+      <s:element minOccurs="0" name="rewardCategoryId" type="s:decimal"/>
+      <s:element minOccurs="0" name="merchantCategoryHierarchyId" type="s:decimal"/>
+      <s:element minOccurs="0" name="creditCode" type="s:string"/>
+      <s:element minOccurs="0" name="creditRedemptionId" type="s:decimal"/>
+      <s:element minOccurs="0" name="quantity" type="s:decimal"/>
+      <s:element minOccurs="0" name="redeemedBaseAmount" type="s:decimal"/>
+      <s:element minOccurs="0" name="billingDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="postingDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="deleteDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="userId" type="s:string"/>
+      <s:element minOccurs="0" name="vendorCost" type="s:decimal"/>
+      <s:element minOccurs="0" name="purchasePointsCharge" type="s:decimal"/>
+      <s:element minOccurs="0" name="overCapCharge" type="s:decimal"/>
+      <s:element minOccurs="0" name="issuerCost" type="s:decimal"/>
+      <s:element minOccurs="0" name="pointsPurchased" type="s:decimal"/>
+      <s:element minOccurs="0" name="shippingAddressId" type="s:decimal"/>
+      <s:element minOccurs="0" name="redeemedLossAmount" type="s:decimal"/>
+      <s:element minOccurs="0" name="lossDescriptionId" type="s:decimal"/>
+      <s:element minOccurs="0" name="lossDescription" type="s:string"/>
+      <s:element minOccurs="0" name="invoiceNumber" type="s:decimal"/>
+      <s:element minOccurs="0" name="nonMonSentDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="redemptionCallId" type="s:decimal"/>
+      <s:element minOccurs="0" name="tripSequenceNumber" type="s:decimal"/>
+      <s:element minOccurs="0" name="passengerName" type="s:string"/>
+      <s:element minOccurs="0" name="paymentFormCode" type="s:string"/>
+      <s:element minOccurs="0" name="fareTypeCode" type="s:string"/>
+      <s:element minOccurs="0" name="invoiceTypeCode" type="s:string"/>
+      <s:element minOccurs="0" name="fulfillmentVendorId" type="s:decimal"/>
+      <s:element minOccurs="0" name="groupId" type="s:decimal"/>
+      <s:element minOccurs="0" name="personalization" type="s:string"/>
+      <s:element minOccurs="0" name="qcCenterId" type="s:decimal"/>
+      <s:element minOccurs="0" name="qcStatusCode" type="s:decimal"/>
+      <s:element minOccurs="0" name="userProfileId" type="s:decimal"/>
+      <s:element minOccurs="0" name="customerId" type="s:decimal"/>
+      <s:element minOccurs="0" name="programId" type="s:decimal"/>
+      <s:element minOccurs="0" name="emailAddressText" type="s:string"/>
+      <s:element minOccurs="0" name="travelComponentQuantity" type="s:decimal"/>
+      <s:element minOccurs="0" name="loggedinAccountId" type="s:decimal"/>
+      <s:element minOccurs="0" name="mrsRedemptionSourceCode" type="s:string"/>
+      <s:element minOccurs="0" name="billAccountId" type="s:decimal"/>
+      <s:element minOccurs="0" name="cashBackAmount" type="s:decimal"/>
+      <s:element minOccurs="0" name="cashBackRedemptionAccountNumber" type="s:string"/>
+      <s:element minOccurs="0" name="vendorOfferId" type="s:decimal"/>
+      <s:element minOccurs="0" name="cashbackSentDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="dealId" type="s:decimal"/>
+      <s:element minOccurs="0" name="redeemedMarkupAmount" type="s:decimal"/>
+      <s:element minOccurs="0" name="matchedMode" type="s:string"/>
+      <s:element minOccurs="0" name="matchDescription" type="s:string"/>
+      <s:element minOccurs="0" name="billingStatus" type="s:string"/>
+      <s:element minOccurs="0" name="grossCash" type="s:decimal"/>
+      <s:element minOccurs="0" name="grossCredit" type="s:decimal"/>
+      <s:element minOccurs="0" name="qcUserId" type="s:string"/>
+      <s:element minOccurs="0" name="nearRealTimeVendorNotification" type="s:boolean"/>
+    </s:sequence>
+  </s:complexType>
+
+  <s:complexType name="AdjustmentAccount">
+    <s:complexContent mixed="false">
+      <s:extension base="tns:Account">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="adjustments" type="tns:Adjustment"/>
+        </s:sequence>
+      </s:extension>
+    </s:complexContent>
+  </s:complexType>
+
+  <s:complexType name="Adjustment">
+    <s:sequence>
+      <s:element minOccurs="0" name="adjustmentDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="adjustmentDescription" type="s:string"/>
+      <s:element minOccurs="0" name="adjustmentReason" type="s:string"/>
+      <s:element minOccurs="0" name="adjustmentValue" type="s:decimal"/>
+    </s:sequence>
+  </s:complexType>
+
+  <s:complexType name="AccumulationDetail">
+    <s:sequence>
+      <s:element minOccurs="0" name="transSequenceNumber" type="s:string"/>
+      <s:element minOccurs="0" name="postingDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="transactionDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="transactionDescription" type="s:string"/>
+      <s:element minOccurs="0" name="transactionAmount" type="s:decimal"/>
+      <s:element minOccurs="0" name="pointsEarned" type="s:decimal"/>
+      <s:element minOccurs="0" name="pointType" type="s:string"/>
+      <s:element minOccurs="0" name="processDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="productCode" type="s:string"/>
+      <s:element minOccurs="0" name="mccClassificationCode" type="s:string"/>
+      <s:element minOccurs="0" name="merchantCategoryCode" type="s:string"/>
+      <s:element minOccurs="0" name="transactionType" type="s:string"/>
+      <s:element minOccurs="0" name="reverseTransactionAmount" type="s:decimal"/>
+      <s:element minOccurs="0" name="merchantCity" type="s:string"/>
+      <s:element minOccurs="0" name="merchantId" type="s:string"/>
+      <s:element minOccurs="0" name="merchantShortDbaName" type="s:string"/>
+      <s:element minOccurs="0" name="merchantDbaName" type="s:string"/>
+      <s:element minOccurs="0" name="reverseIndicator" type="s:string"/>
+      <s:element minOccurs="0" name="issuerIcaCode" type="s:decimal"/>
+      <s:element minOccurs="0" name="basePointsAccrued" type="s:decimal"/>
+      <s:element minOccurs="0" name="promotionId" type="s:decimal"/>
+      <s:element minOccurs="0" name="promotionPointsAccrued" type="s:decimal"/>
+      <s:element minOccurs="0" name="aggregateMerchantId" type="s:decimal"/>
+      <s:element minOccurs="0" name="merchantAddress" type="s:string"/>
+      <s:element minOccurs="0" name="merchantCountryCode" type="s:string"/>
+      <s:element minOccurs="0" name="merchantPostalCode" type="s:string"/>
+      <s:element minOccurs="0" name="cardholderPresentCode" type="s:string"/>
+      <s:element minOccurs="0" name="bankPromotionText" type="s:string"/>
+      <s:element minOccurs="0" name="pointOfSaleCategoryLevel" type="s:string"/>
+      <s:element minOccurs="0" name="acquirerIcaCode" type="s:decimal"/>
+      <s:element minOccurs="0" name="itemDescription" type="s:string"/>
+      <s:element minOccurs="0" name="sellingChannel" type="s:string"/>
+      <s:element minOccurs="0" name="storeNumber" type="s:string"/>
+      <s:element minOccurs="0" name="storeDivision" type="s:string"/>
+      <s:element minOccurs="0" name="productLine" type="s:string"/>
+      <s:element minOccurs="0" name="itemCode" type="s:string"/>
+      <s:element minOccurs="0" name="itemSku" type="s:string"/>
+      <s:element minOccurs="0" name="offerTypeCode" type="s:string"/>
+      <s:element minOccurs="0" name="clientTransactionCode" type="s:string"/>
+      <s:element minOccurs="0" name="debitSw" type="s:boolean"/>
+      <s:element minOccurs="0" name="transactionSourceCode" type="s:string"/>
+      <s:element minOccurs="0" name="bankProductCode" type="s:string"/>
+      <s:element minOccurs="0" name="bankCustomerNumber" type="s:string"/>
+      <s:element minOccurs="0" name="postingDateTime" type="s:dateTime"/>
+      <s:element minOccurs="0" name="issuingCountryCode" type="s:string"/>
+      <s:element minOccurs="0" name="cardholderTransactionType" type="s:string"/>
+      <s:element minOccurs="0" name="issuingRegion" type="s:string"/>
+      <s:element minOccurs="0" name="merchantMccGroup" type="s:string"/>
+      <s:element minOccurs="0" name="dataWarehouseMerchantRegion" type="s:string"/>
+      <s:element minOccurs="0" name="dataWarehouseMerchantState" type="s:string"/>
+      <s:element minOccurs="0" name="acquirerCountry" type="s:string"/>
+      <s:element minOccurs="0" name="locationId" type="s:decimal"/>
+      <s:element minOccurs="0" name="transactionTime" type="s:string"/>
+      <s:element minOccurs="0" name="de0004AmountTransaction" type="s:decimal"/>
+      <s:element minOccurs="0" name="de0005AmountReconciliation" type="s:decimal"/>
+      <s:element minOccurs="0" name="de0006AmountCardholderBilling" type="s:decimal"/>
+      <s:element minOccurs="0" name="de0049CurrencyCodeTransaction" type="s:string"/>
+      <s:element minOccurs="0" name="de0050CurrencyCodeReconciliation" type="s:string"/>
+      <s:element minOccurs="0" name="de0051CurrencyCodeCardholderBilling" type="s:string"/>
+      <s:element minOccurs="0" name="transactionCurrencyTransactionAmount" type="s:decimal"/>
+      <s:element minOccurs="0" name="accrualRuleId" type="s:decimal"/>
+      <s:element minOccurs="0" name="baseCapTypeId" type="s:decimal"/>
+      <s:element minOccurs="0" name="promotionCapTypeId" type="s:decimal"/>
+      <s:element minOccurs="0" name="pointUpdateSw" type="s:boolean"/>
+      <s:element minOccurs="0" name="acquirerReferenceNumber" type="s:decimal"/>
+      <s:element minOccurs="0" name="promotionSentDate" type="s:dateTime"/>
+      <s:element minOccurs="0" name="accountStatusId" type="s:decimal"/>
+      <s:element minOccurs="0" name="accruePointsSw" type="s:boolean"/>
+      <s:element minOccurs="0" name="cardInputCapabilityCode" type="s:string"/>
+      <s:element minOccurs="0" name="cardInputModeCode" type="s:string"/>
+      <s:element minOccurs="0" name="cardOutputModeCode" type="s:string"/>
+      <s:element minOccurs="0" name="cardSequenceNumber" type="s:decimal"/>
+      <s:element minOccurs="0" name="authorizationCode" type="s:string"/>
+      <s:element minOccurs="0" name="pointOfSaleBanknetReference" type="s:string"/>
+      <s:element minOccurs="0" name="pointOfSaleBanknetDate" type="s:string"/>
+      <s:element minOccurs="0" name="addendumAmtAccountType" type="s:string"/>
+      <s:element minOccurs="0" name="addendumAmtAmountType" type="s:string"/>
+      <s:element minOccurs="0" name="addendumAmtCurrencyCode" type="s:string"/>
+      <s:element minOccurs="0" name="addendumAmtSign" type="s:string"/>
+      <s:element minOccurs="0" name="addendumAmtAmount" type="s:decimal"/>
+      <s:element minOccurs="0" name="installmentCount" type="s:decimal"/>
+      <s:element minOccurs="0" name="installmentNumber" type="s:decimal"/>
+      <s:element minOccurs="0" name="promotionUserMessageTxt" type="s:string"/>
+    </s:sequence>
+  </s:complexType>
+
+  <s:element name="getAuthorizations">
+    <s:complexType>
+      <s:sequence>
+        <s:element minOccurs="0" name="fromDate" type="s:dateTime"/>
+        <s:element minOccurs="0" name="toDate" type="s:dateTime"/>
+        <s:element minOccurs="0" name="includeReprocessHistory" type="s:boolean"/>
+        <s:element minOccurs="0" name="bankNetReferenceNumber" type="s:string"/>
+        <s:element minOccurs="0" maxOccurs="unbounded" name="pwrFilterCategory" type="tns:PwrFilterCategory" />
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+
+  <s:simpleType name="PwrFilterCategory">
+    <s:restriction base="s:string">
+      <s:enumeration value="R" />
+      <s:enumeration value="E" />
+      <s:enumeration value="I" />
+    </s:restriction>
+  </s:simpleType>
+
+  <s:element name="getAuthorizationsResponse">
+    <s:complexType>
+      <s:sequence>
+      <s:element minOccurs="0" maxOccurs="unbounded" name="authorizationResponses" type="tns:AuthorizationResponse"/>
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+
+  <s:complexType name="AuthorizationResponse">
+    <s:sequence>
+      <s:element name="authResponseLogId" type="s:decimal"/>
+      <s:element minOccurs="0" name="reprocessedAuthResponseLogId" type="s:decimal"/>
+      <s:element minOccurs="0" name="de004TransactionAmount" type="s:string"/>
+      <s:element minOccurs="0" name="de005IssuerCurrencySettlementAmount" type="s:string"/>
+      <s:element minOccurs="0" name="de006CardholderBillingAmount" type="s:string"/>
+      <s:element minOccurs="0" name="de012TransactionTime" type="s:string"/>
+      <s:element minOccurs="0" name="de013TransactionDate" type="s:string"/>
+      <s:element minOccurs="0" name="de018MerchantCode" type="s:string"/>
+      <s:element minOccurs="0" name="de032AcquiringInstitutionIdCode" type="s:string"/>
+      <s:element minOccurs="0" name="de039ResponseCode" type="s:string"/>
+      <s:element minOccurs="0" name="de042CardAcceptorIdCode" type="s:string"/>
+      <s:element minOccurs="0" name="de043CardAcceptorNameLocation" type="s:string"/>
+      <s:element minOccurs="0" name="de048TCC" type="s:string"/>
+      <s:element minOccurs="0" name="de049TransactionCurrencyCode" type="s:string"/>
+      <s:element minOccurs="0" name="de050SettlementCurrencyCode" type="s:string"/>
+      <s:element minOccurs="0" name="de051CardholderBillingCurrencyCode" type="s:string"/>
+      <s:element name="responseReasonId" type="s:long"/>
+      <s:element minOccurs="0" name="responseReasonDesc" type="s:string"/>
+      <s:element minOccurs="0" name="pointsRedeemed" type="s:decimal"/>
+      <s:element minOccurs="0" name="merchantCategoryName" type="s:string"/>
+      <s:element name="bankNetReferenceNumber" type="s:string"/>
+      <s:element minOccurs="0" name="reprocessedBy" type="s:string"/>
+      <s:element minOccurs="0" name="reprocessedDateTime" type="s:dateTime"/>
+    </s:sequence>
+  </s:complexType>
+
+  <s:element name="reprocessAuthorization">
+    <s:complexType>
+      <s:sequence>
+        <s:element name="authResponseLogId" type="s:long"/>
+        <s:element minOccurs="0" name="userId" type="s:string" />
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+
+  <s:element name="reprocessAuthorizationResponse">
+    <s:complexType>
+      <s:sequence>
+        <s:element name="authResponseLogId" type="s:decimal"/>
+        <s:element name="authResponseCode" type="s:decimal"/>
+        <s:element name="reprocessedAuthResponseLogId" type="s:decimal"/>
+        <s:element name="reprocessedAuthResponseCode" type="s:decimal"/>
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+  
+  <s:element name="addMappingRecord">
+    <s:complexType>
+          <s:sequence>
+            <s:element name="memberIca" type="s:long" />
+            <s:element minOccurs="0" name="bankProductCode" type="s:string" />
+            <s:element minOccurs="0" name="programIdentifier" type="s:string" />
+            <s:element name="mappingActionCode" type="tns:MappingActionCode"/>
+            <s:element name="mappingTypeCode" type="s:string" />
+            <s:element name="mappingId" type="s:string" />
+            <s:element name="mappingStatusCode" type="s:string" />
+            <s:element minOccurs="0" name="expirationDate" type="s:dateTime" />
+            <s:element minOccurs="0" name="enrollmentDate" type="s:dateTime" />
+            <s:element minOccurs="0" name="userDefined1" type="s:string" />
+            <s:element minOccurs="0" name="userDefined2" type="s:string" />
+            <s:element minOccurs="0" name="userDefined3" type="s:string" />
+            <s:element minOccurs="0" name="userDefined4" type="s:string" />
+            <s:element minOccurs="0" name="userDefined5" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+  </s:element>
+  
+  <s:element name="addMappingRecordResponse">
+   <s:complexType>
+       <s:sequence>
+       		  <s:element minOccurs="0" name="mappingRecordResult" type="common:SuccessResp" />
+              <s:element minOccurs="0" name="mappingTypeCode" type="s:string" />
+              <s:element minOccurs="0" name="mappingId" type="s:string"/>
+              <s:element minOccurs="0" name="mappingStatusCode" type="s:string" />
+              <s:element minOccurs="0" name="expirationDate" type="s:dateTime" />
+              <s:element minOccurs="0" name="enrollmentDate" type="s:dateTime" />
+              <s:element minOccurs="0" name="userDefined1" type="s:string" />
+              <s:element minOccurs="0" name="userDefined2" type="s:string" />
+              <s:element minOccurs="0" name="userDefined3" type="s:string" />
+              <s:element minOccurs="0" name="userDefined4" type="s:string" />
+              <s:element minOccurs="0" name="userDefined5" type="s:string" />
+       </s:sequence>
+   </s:complexType>
+  </s:element>
+
+  <s:element name="updateMappingRecord">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="memberIca" type="s:long" />
+            <s:element minOccurs="0" name="bankProductCode" type="s:string" />
+            <s:element minOccurs="0" name="programIdentifier" type="s:string" />
+            <s:element name="mappingActionCode" type="tns:MappingActionCode" />
+            <s:element name="mappingTypeCode" type="s:string" />
+            <s:element name="mappingId" type="s:string" />
+            <s:element name="mappingStatusCode" type="s:string" />
+            <s:element minOccurs="0" name="expirationDate" type="s:dateTime" />
+            <s:element minOccurs="0" name="enrollmentDate" type="s:dateTime" />
+            <s:element minOccurs="0" name="userDefined1" type="s:string" />
+            <s:element minOccurs="0" name="userDefined2" type="s:string" />
+            <s:element minOccurs="0" name="userDefined3" type="s:string" />
+            <s:element minOccurs="0" name="userDefined4" type="s:string" />
+            <s:element minOccurs="0" name="userDefined5" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+  </s:element>
+      
+  <s:simpleType name="MappingActionCode">
+    <s:restriction base="s:string">
+      <s:enumeration value="A" />
+      <s:enumeration value="C" />
+      <s:enumeration value="H" />
+      <s:enumeration value="P" />
+    </s:restriction>
+  </s:simpleType>
+      
+  <s:element name="updateMappingRecordResponse">
+        <s:complexType>
+          	<s:sequence>
+             <s:element minOccurs="0" name="updateMappingRecordResult" type="common:SuccessResp" />
+            </s:sequence>
+        </s:complexType>
+  </s:element>
+  
+  <s:element name="postAuthTransaction">
+	<s:complexType>
+		<s:sequence>
+			<s:element name="messageTypeIdentifier">
+				<s:simpleType>
+					<s:restriction base="s:string">
+						<s:maxLength value="250" />
+					</s:restriction>
+				</s:simpleType>
+			</s:element>
+			<s:element name="bankAccountNumber">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="19" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="processingCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="6" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element name="cardholderBillingAmount">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="12" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="transactionAmount">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="12" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="issuerSettlementAmount">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="12" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="transmissionDateAndTime">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="10" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="amountCardholderBillingFee" type="s:long" />
+	      	<s:element minOccurs="0" name="conversionRateSettled" type="s:long" />
+	      	<s:element minOccurs="0" name="conversionRateCardholderBilling" type="s:long" />
+			<s:element minOccurs="0" name="systemTraceAuditNumber">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="6" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element name="transactionDateAndTime" type="s:dateTime" />
+			<s:element minOccurs="0" name="merchantTypeCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="4" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="pointOfSaleEntryMode" type="s:int" />
+			<s:element minOccurs="0" name="acquiringInstitutionIdCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="30" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="forwardingInstitutionIdCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="6" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="authorizationIdResponse">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="6" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="responseCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="2" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="cardAcceptorIdCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="15" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element name="cardAcceptorNameAndLocation">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="40" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="transactionCategoryCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="250" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="transactionCurrencyCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="3" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="reconciliationCurrencyCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="3" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="cardholderBillingCurrencyCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="3" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="additionalAmount">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="120" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="reserved">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="60" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="pointOfSaleData">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="26" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+	      	<s:element minOccurs="0" name="cardholderAccountTerminalLevel" type="s:int" />
+	      	<s:element minOccurs="0" name="pointOfSaleCardTerminalInputCapability" type="s:int" />
+	      	<s:element minOccurs="0" name="pointOfSaleCountryCode" type="s:int" />
+			<s:element minOccurs="0" name="pointOfSalePostalCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="10" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="pointOfSaleCardholderPresence">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="1" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+	  	    <s:element minOccurs="0" name="pointOfSaleCardPresence" type="s:int" />
+	    	<s:element minOccurs="0" name="pointOfSaleCaptureCapabilities" type="s:int" />
+			<s:element minOccurs="0" name="originalDataElement">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="42" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="replacementAmount">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="42" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="accountId1">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="28" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="accountId2">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="28" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="panMappingFileInformation">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="43" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="walletIdentifier">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="3" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="accountNumberIndicator">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="2" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="accountNumber">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="19" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+	      	<s:element minOccurs="0" name="expirationDate" type="s:int" />
+			<s:element minOccurs="0" name="productCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="3" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+	      	<s:element minOccurs="0" name="tokenAssuranceLevel" type="s:int" />
+	      	<s:element minOccurs="0" name="tokenRequestorId" type="s:long" />
+			<s:element minOccurs="0" name="primaryAccountNumber">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="19" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+	      	<s:element minOccurs="0" name="partialApprovalSwitch" type="s:int" />
+			<s:element minOccurs="0" name="onBehalfService">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="2" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="onBehalfServiceResult1">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="1" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="onBehalfServiceResult2">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="1" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="originalReferenceNUmber">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="250" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="pathText">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="250" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element name="bankNetReferenceNumber">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="9" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element name="serviceIdentifier">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="250" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+  
+  <s:element name="postAuthTransactionResponse">
+    <s:complexType>
+      <s:sequence>
+        <s:element minOccurs="0" maxOccurs="unbounded" name="authProcessingResponse" type="tns:authProcessingResponse" />
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+  
+  <s:complexType name="authProcessingResponse">
+     <s:sequence>
+      <s:element name="programId" type="s:long" />
+      <s:element name="authRewardsServiceId" type="s:long" />
+      <s:element name="authRewardsServiceType" type="s:string" />
+      <s:element name="responseReasonId" type="s:long" />
+      <s:element name="responseReasonDesc" type="s:string" />
+    </s:sequence>
+  </s:complexType>
+  
+  <s:element name="queueAuthTransaction">
+	<s:complexType>
+		<s:sequence>
+			<s:element name="messageTypeIdentifier">
+				<s:simpleType>
+					<s:restriction base="s:string">
+						<s:maxLength value="250" />
+					</s:restriction>
+				</s:simpleType>
+			</s:element>
+			<s:element name="bankAccountNumber">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="19" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="processingCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="6" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element name="cardholderBillingAmount">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="12" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="transactionAmount">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="12" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="issuerSettlementAmount">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="12" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="transmissionDateAndTime">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="10" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="amountCardholderBillingFee" type="s:long" />
+	      	<s:element minOccurs="0" name="conversionRateSettled" type="s:long" />
+	      	<s:element minOccurs="0" name="conversionRateCardholderBilling" type="s:long" />
+			<s:element minOccurs="0" name="systemTraceAuditNumber">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="6" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element name="transactionDateAndTime" type="s:dateTime" />
+			<s:element minOccurs="0" name="merchantTypeCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="4" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="pointOfSaleEntryMode" type="s:int" />
+			<s:element minOccurs="0" name="acquiringInstitutionIdCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="30" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="forwardingInstitutionIdCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="6" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="authorizationIdResponse">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="6" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="responseCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="2" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="cardAcceptorIdCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="15" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element name="cardAcceptorNameAndLocation">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="40" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="transactionCategoryCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="250" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="transactionCurrencyCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="3" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="reconciliationCurrencyCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="3" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="cardholderBillingCurrencyCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="3" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="additionalAmount">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="120" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="reserved">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="60" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="pointOfSaleData">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="26" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+	      	<s:element minOccurs="0" name="cardholderAccountTerminalLevel" type="s:int" />
+	      	<s:element minOccurs="0" name="pointOfSaleCardTerminalInputCapability" type="s:int" />
+	      	<s:element minOccurs="0" name="pointOfSaleCountryCode" type="s:int" />
+			<s:element minOccurs="0" name="pointOfSalePostalCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="10" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="pointOfSaleCardholderPresence">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="1" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+	  	    <s:element minOccurs="0" name="pointOfSaleCardPresence" type="s:int" />
+	    	<s:element minOccurs="0" name="pointOfSaleCaptureCapabilities" type="s:int" />
+			<s:element minOccurs="0" name="originalDataElement">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="42" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="replacementAmount">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="42" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="accountId1">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="28" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="accountId2">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="28" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="panMappingFileInformation">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="43" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="walletIdentifier">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="3" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="accountNumberIndicator">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="2" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="accountNumber">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="19" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+	      	<s:element minOccurs="0" name="expirationDate" type="s:int" />
+			<s:element minOccurs="0" name="productCode">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="3" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+	      	<s:element minOccurs="0" name="tokenAssuranceLevel" type="s:int" />
+	      	<s:element minOccurs="0" name="tokenRequestorId" type="s:long" />
+			<s:element minOccurs="0" name="primaryAccountNumber">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="19" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+	      	<s:element minOccurs="0" name="partialApprovalSwitch" type="s:int" />
+			<s:element minOccurs="0" name="onBehalfService">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="2" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="onBehalfServiceResult1">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="1" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="onBehalfServiceResult2">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="1" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="originalReferenceNUmber">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="250" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element minOccurs="0" name="pathText">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="250" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element name="bankNetReferenceNumber">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="9" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+			<s:element name="serviceIdentifier">
+				<s:simpleType>
+	        		<s:restriction base="s:string">
+	          			<s:maxLength value="250" />
+	        		</s:restriction>
+          		</s:simpleType>
+        	</s:element>
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+  
+  <s:element name="queueAuthTransactionResponse">
+    <s:complexType>
+      <s:sequence>
+        <s:element minOccurs="0" name="queueAuthTransactionResult" type="common:SuccessResp" />
+        <s:element minOccurs="0" name="message" type="s:string" />
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+  
+  <s:element name="postClearingTransaction">
+    <s:complexType>
+      <s:sequence>
+      	<s:element minOccurs="0" name="aquiringCountry">
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="aquiringICACd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:long">
+	      			<s:maxInclusive value="99999999999" />
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="aquiringRefNumber" type = "s:long" />
+      	<s:element minOccurs="0" name="additionalAmtAccountType" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="2"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="additionalAmtAmount" type = "s:decimal" />
+      	<s:element minOccurs="0" name="additionalAmtAmountType" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="additionalAmtCurrencyCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="additionalAmtSign" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="aggregateMerchantId" >
+      		<s:simpleType>
+	      		<s:restriction base="s:long">
+	      			<s:maxInclusive value="6"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="authIdResponse" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="6"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element name="bankAccountNumber">
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="19"/>
+	      			<s:minLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="cardAcceptorIdCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="22"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="cardInputCapabilityCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="cardInputModeCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="cardOutputModeCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="cardSequenceNumber" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:long">
+	      			<s:maxInclusive value="999"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="clientTransactionCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="5"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="cardHolderBillingCurrencyCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="transactionAmount" type="s:decimal"/>
+      	<s:element minOccurs="0" name="issuerSettelemetAmount" type="s:decimal" />
+      	<s:element minOccurs="0" name="debitSw" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="issuingCountry" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element name="issuingICACd" type="s:long" />
+      	<s:element minOccurs="0" name="issuingRegion" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="2"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="itemCd">
+			<s:simpleType>
+				<s:restriction	base="s:string">
+					<s:maxLength value="15"/>				
+				</s:restriction>
+			</s:simpleType>      		
+      	</s:element>
+      	<s:element minOccurs="0" name="itemDesc" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="40"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="itemSku" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="15"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="locationId" type="s:long" />
+      	<s:element name="merchantCategoryCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="4"/>
+	      			<s:minLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element name="merchantTypeClassificationCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      			<s:minLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="merchantCity" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="21"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="merchantCountryCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="merchantCategoryGroup" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="2"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="merchantPostalCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="10"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="merchantRegion" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="2"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="merchantShortDBAName" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="22"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="merchantState" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element name="merchantTransactionDBAName" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="60"/>
+	      			<s:minLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="merchantAddress" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="30"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="offerTypeCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="5"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="pointOfSaleCardTerminalInputCapability" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="pointSaleCategoryLvl" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="pointOfSaleCountryCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="pointOfSaleCardHolderPresent" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="pointOfSalePostalCode" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="10"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="processCode" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="2"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="productCode" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="productLine" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="10"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="bankNetRefNumber" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="9"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="bankNetRefNumberDate" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="4"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="reverseInd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="reverseTransactionAmt" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:decimal">
+	      			<s:maxInclusive value="9999999999"/>
+	      			<s:fractionDigits value="2"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="sellingChannel" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="10"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element name="sequenceNumber" type="s:long" />
+      	<s:element minOccurs="0" name="settlementCurrencyCode">
+      		<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="storeDivision" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="10"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="storeNumber" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="10"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="tokenAssuranceLevelCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="2"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="tokenRequestId" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="11"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="transactionCurrencyCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="transactionCurrencyTransAmt" >
+      		<s:simpleType>
+	      		<s:restriction base="s:decimal">
+	      			<s:maxInclusive value="999999999999"/>
+	      			<s:fractionDigits value="2"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element name="transactionDateAndTime" type="s:dateTime" />
+      	<s:element name="cardHolderBillingAmount" >
+      		<s:simpleType>
+	      		<s:restriction base="s:decimal">
+	      			<s:maxInclusive value="999999999999"/>
+	      			<s:fractionDigits value="2"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="transactionSeqNumber" type="s:long" />
+      	<s:element minOccurs="0" name="transactionSourceCd" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element name="transactionType" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="1"/>
+	      			<s:minLength value="1"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      	<s:element minOccurs="0" name="walletId" >
+	      	<s:simpleType>
+	      		<s:restriction base="s:string">
+	      			<s:maxLength value="3"/>
+	      		</s:restriction>
+	      	</s:simpleType>
+      	</s:element>
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+  
+  <s:element name="postClearingTransactionResponse">
+    <s:complexType>
+      <s:sequence>
+        <s:element minOccurs="0" name="postClearingTransactionResult" type="common:SuccessResp" />
+        <s:element minOccurs="0" name="message" type="s:string" />
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+  
+</schema>

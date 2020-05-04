@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision$ $Date$-->
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://customer.ws.mcrewards.mastercard.com/"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://customer.ws.mcrewards.mastercard.com/"
+                  xmlns:common="http://common.ws.mcrewards.mastercard.com/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+  <wsdl:import location="MrsCommon.wsdl" namespace="http://common.ws.mcrewards.mastercard.com/" />
+
+  <wsdl:types>
+    <s:schema>
+      <s:import schemaLocation="CustomerService.xsd" namespace="http://customer.ws.mcrewards.mastercard.com/" />
+    </s:schema>
+
+    </wsdl:types>
+
+
+  <!-- MESSAGES -->
+  <wsdl:message name="getCustomerQualificationsSoapIn">
+    <wsdl:part name="parameters" element="tns:getCustomerQualifications" />
+  </wsdl:message>
+
+  <wsdl:message name="getCustomerQualificationsSoapOut">
+    <wsdl:part name="parameters" element="tns:getCustomerQualificationsResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="getCustomerInformationSoapIn">
+    <wsdl:part name="parameters" element="tns:getCustomerInformation" />
+  </wsdl:message>
+
+  <wsdl:message name="getCustomerInformationSoapOut">
+    <wsdl:part name="parameters" element="tns:CustomerInformation" />
+  </wsdl:message>
+
+  <wsdl:message name="getCustomerAccountsSoapIn">
+    <wsdl:part name="in" element="tns:getCustomerAccounts" />
+  </wsdl:message>
+
+  <wsdl:message name="getCustomerAccountsSoapOut">
+    <wsdl:part name="out" element="tns:CustomerAccounts" />
+  </wsdl:message>
+
+  <wsdl:message name="getValidationQuestionsSoapIn">
+    <wsdl:part name="parameters" element="tns:getValidationQuestions" />
+  </wsdl:message>
+
+  <wsdl:message name="getValidationQuestionsSoapOut">
+    <wsdl:part name="parameters" element="tns:getValidationQuestionsResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="validateCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:validateCustomer" />
+  </wsdl:message>
+
+  <wsdl:message name="validateCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:validateCustomerResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="getPointBalanceSoapIn">
+    <wsdl:part name="parameters" element="tns:getPointBalance" />
+  </wsdl:message>
+
+  <wsdl:message name="getPointBalanceSoapOut">
+    <wsdl:part name="parameters" element="tns:getPointBalanceResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="getAvailablePointsSoapIn" />
+
+  <wsdl:message name="getAvailablePointsSoapOut">
+    <wsdl:part name="parameters" element="tns:AvailablePoints" />
+  </wsdl:message>
+
+  <wsdl:message name="getHouseholdPointsSoapIn">
+    <wsdl:part name="parameters" element="tns:getHouseholdPoints" />
+  </wsdl:message>
+
+  <wsdl:message name="getHouseholdPointsSoapOut">
+    <wsdl:part name="parameters" element="tns:AvailablePoints" />
+  </wsdl:message>
+
+  <wsdl:message name="getShippingAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:getShippingAddress" />
+  </wsdl:message>
+
+  <wsdl:message name="getShippingAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:getShippingAddressResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="updateCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:updateCustomer" />
+  </wsdl:message>
+
+  <wsdl:message name="updateCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:updateCustomerResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="setPreferredLanguageIn">
+    <wsdl:part name="parameters" element="tns:setPreferredLanguage" />
+  </wsdl:message>
+
+  <wsdl:message name="setPreferredLanguageOut">
+    <wsdl:part name="parameters" element="tns:setPreferredLanguageResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="getPointDetailsIn">
+    <wsdl:part name="parameters" element="tns:getPointDetails" />
+  </wsdl:message>
+
+  <wsdl:message name="getPointDetailsOut">
+    <wsdl:part name="parameters" element="tns:PointDetails" />
+  </wsdl:message>
+
+  <wsdl:message name="getRTRPreferencesIn">
+    <wsdl:part name="parameters" element="tns:getRTRPreferences" />
+  </wsdl:message>
+
+  <wsdl:message name="getRTRPreferencesOut">
+    <wsdl:part name="parameters" element="tns:RTRPreferences" />
+  </wsdl:message>
+
+  <wsdl:message name="setRTRPreferencesIn">
+    <wsdl:part name="parameters" element="tns:setRTRPreferences" />
+  </wsdl:message>
+
+  <wsdl:message name="setRTRPreferencesOut">
+    <wsdl:part name="parameters" element="tns:RTRPreferences" />
+  </wsdl:message>
+
+  <wsdl:message name="enrollIn">
+    <wsdl:part name="parameters" element="tns:enroll"/>
+  </wsdl:message>
+
+  <wsdl:message name="enrollOut">
+    <wsdl:part name="parameters" element="tns:enrollResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="getCustomerDetailsIn">
+    <wsdl:part name="parameters" element="tns:getCustomerDetails" />
+  </wsdl:message>
+
+  <wsdl:message name="getCustomerDetailsOut">
+    <wsdl:part name="parameters" element="tns:CustomerDetails" />
+  </wsdl:message>
+
+  <wsdl:message name="updateCustomerAccountIn">
+    <wsdl:part name="parameters" element="tns:updateCustomerAccount"/>
+  </wsdl:message>
+
+  <wsdl:message name="updateCustomerAccountOut">
+    <wsdl:part name="parameters" element="tns:updateCustomerAccountResponse"/>
+  </wsdl:message>
+  
+  <wsdl:message name="updateLostStolenIn">
+  	<wsdl:part name="parameters" element="tns:updateLostStolenAccount"></wsdl:part>
+  </wsdl:message>
+  
+  <wsdl:message name="updateLostStolenOut">
+  	<wsdl:part name="parameters" element="tns:updateLostStolenAccountResponse"></wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="verifyCardSoapIn">
+    <wsdl:part name="parameters" element="tns:verifyCard" />
+  </wsdl:message>
+
+  <wsdl:message name="verifyCardSoapOut">
+    <wsdl:part name="parameters" element="tns:verifyCardResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="saveQualificationSoapIn">
+    <wsdl:part name="parameters" element="tns:saveQualification" />
+  </wsdl:message>
+
+  <wsdl:message name="saveQualificationSoapOut">
+    <wsdl:part name="parameters" element="tns:saveQualificationResponse" />
+  </wsdl:message>
+
+  <!-- PORTS -->
+  <wsdl:portType name="CustomerService">
+    <wsdl:operation name="getCustomerQualifications">
+      <wsdl:input message="tns:getCustomerQualificationsSoapIn" />
+      <wsdl:output message="tns:getCustomerQualificationsSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+  
+    <wsdl:operation name="getCustomerInformation">
+      <wsdl:input message="tns:getCustomerInformationSoapIn" />
+      <wsdl:output message="tns:getCustomerInformationSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="getCustomerAccounts">
+      <wsdl:input message="tns:getCustomerAccountsSoapIn" />
+      <wsdl:output message="tns:getCustomerAccountsSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="getValidationQuestions">
+      <wsdl:input message="tns:getValidationQuestionsSoapIn" />
+      <wsdl:output message="tns:getValidationQuestionsSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="validateCustomer">
+      <wsdl:input message="tns:validateCustomerSoapIn" />
+      <wsdl:output message="tns:validateCustomerSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="getPointBalance">
+      <wsdl:input message="tns:getPointBalanceSoapIn" />
+      <wsdl:output message="tns:getPointBalanceSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="getAvailablePoints">
+      <wsdl:input message="tns:getAvailablePointsSoapIn" />
+      <wsdl:output message="tns:getAvailablePointsSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="getHouseholdPoints">
+      <wsdl:input message="tns:getHouseholdPointsSoapIn" />
+      <wsdl:output message="tns:getHouseholdPointsSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="getShippingAddress">
+      <wsdl:input message="tns:getShippingAddressSoapIn" />
+      <wsdl:output message="tns:getShippingAddressSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="updateCustomer">
+      <wsdl:input message="tns:updateCustomerSoapIn" />
+      <wsdl:output message="tns:updateCustomerSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="setPreferredLanguage">
+      <wsdl:input message="tns:setPreferredLanguageIn"/>
+      <wsdl:output message="tns:setPreferredLanguageOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="getPointDetails">
+      <wsdl:input message="tns:getPointDetailsIn"/>
+      <wsdl:output message="tns:getPointDetailsOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="getRTRPreferences">
+      <wsdl:input message="tns:getRTRPreferencesIn"/>
+      <wsdl:output message="tns:getRTRPreferencesOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="setRTRPreferences">
+      <wsdl:input message="tns:setRTRPreferencesIn"/>
+      <wsdl:output message="tns:setRTRPreferencesOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="enroll">
+      <wsdl:input message="tns:enrollIn"/>
+      <wsdl:output message="tns:enrollOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="getCustomerDetails">
+      <wsdl:input message="tns:getCustomerDetailsIn"/>
+      <wsdl:output message="tns:getCustomerDetailsOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="updateCustomerAccount">
+      <wsdl:input message="tns:updateCustomerAccountIn"/>
+      <wsdl:output message="tns:updateCustomerAccountOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    
+    <wsdl:operation name="updateLostStolenAccount">
+    	<wsdl:input message="tns:updateLostStolenIn"></wsdl:input>
+    	<wsdl:output message="tns:updateLostStolenOut"></wsdl:output>
+    	 <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="verifyCard">
+      <wsdl:input message="tns:verifyCardSoapIn"></wsdl:input>
+      <wsdl:output message="tns:verifyCardSoapOut"></wsdl:output>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="saveQualification">
+      <wsdl:input message="tns:saveQualificationSoapIn" />
+      <wsdl:output message="tns:saveQualificationSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+  </wsdl:portType>
+
+
+  <!-- BINDINGS -->
+  <wsdl:binding name="CustomerService" type="tns:CustomerService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+
+    <wsdl:operation name="getCustomerQualifications">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/getCustomerQualifications"
+        style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getCustomerInformation">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/getCustomerInformation"
+        style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getCustomerAccounts">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/getCustomerAccounts" style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getValidationQuestions">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/getValidationQuestions"
+        style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="validateCustomer">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/validateCustomer"
+        style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getPointBalance">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/getPointBalance" style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getAvailablePoints">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/getAvailablePoints" style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getHouseholdPoints">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/getHouseholdPoints" style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getShippingAddress">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/getShippingAddress" style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="updateCustomer">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/updateCustomer" style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="setPreferredLanguage">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/setPreferredLanguage"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getPointDetails">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/getPointDetails"
+        style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getRTRPreferences">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/getRTRPreferences"
+        style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="setRTRPreferences">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/setRTRPreferences"
+        style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="enroll">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/enroll"
+        style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getCustomerDetails">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/getCustomerDetails"
+        style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="updateCustomerAccount">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/updateCustomerAccount"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    
+    <wsdl:operation name="updateLostStolenAccount">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/updateLostStolenAccount"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="verifyCard">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/verifyCard" style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="saveQualification">
+      <soap:operation soapAction="http://customer.ws.mcrewards.mastercard.com/saveQualification"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+  </wsdl:binding>
+
+  <wsdl:service name="CustomerService">
+    <wsdl:port name="CustomerService" binding="tns:CustomerService">
+      <soap:address location="http://localhost:8080/mrswebservices/CustomerService" />
+      <!-- DEV -->
+      <!-- <soap:address location="https://10.158.130.219:25027/mrswebservices/CustomerService"/> -->
+      <!-- STAGE -->
+      <!-- <soap:address location="https://10.157.251.57:25027/mrswebservices/CustomerService"/>  -->
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

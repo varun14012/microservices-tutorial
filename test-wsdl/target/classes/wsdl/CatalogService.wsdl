@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision$ $Date$-->
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://catalog.ws.mcrewards.mastercard.com/"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://catalog.ws.mcrewards.mastercard.com/"
+                  xmlns:common="http://common.ws.mcrewards.mastercard.com/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+  <wsdl:import location="MrsCommon.wsdl" namespace="http://common.ws.mcrewards.mastercard.com/" />
+
+  <wsdl:types>
+    <s:schema>
+      <s:import schemaLocation="CatalogService.xsd" namespace="http://catalog.ws.mcrewards.mastercard.com/" />
+    </s:schema>
+  </wsdl:types>
+
+
+  <!-- MESSAGES -->
+  <wsdl:message name="getRewardItemsSoapIn">
+    <wsdl:part name="parameters" element="tns:getRewardItems"/>
+  </wsdl:message>
+
+  <wsdl:message name="getRewardItemsSoapOut">
+    <wsdl:part name="parameters" element="tns:RewardMatrixItems"/>
+  </wsdl:message>
+
+  <wsdl:message name="getRewardCatalogSoapIn">
+    <wsdl:part name="parameters" element="tns:getRewardCatalog"/>
+  </wsdl:message>
+
+  <wsdl:message name="getRewardCatalogSoapOut">
+    <wsdl:part name="parameters" element="tns:RewardCatalog"/>
+  </wsdl:message>
+
+
+  <!-- PORTS -->
+  <wsdl:portType name="CatalogService">
+    <wsdl:operation name="getRewardItems">
+      <wsdl:input message="tns:getRewardItemsSoapIn"/>
+      <wsdl:output message="tns:getRewardItemsSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="getRewardCatalog">
+      <wsdl:input message="tns:getRewardCatalogSoapIn"/>
+      <wsdl:output message="tns:getRewardCatalogSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+
+  <!-- BINDINGS -->
+  <wsdl:binding name="CatalogService" type="tns:CatalogService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getRewardItems">
+      <soap:operation soapAction="http://catalog.ws.mcrewards.mastercard.com/getRewardItems" style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getRewardCatalog">
+      <soap:operation soapAction="http://catalog.ws.mcrewards.mastercard.com/getRewardCatalog" style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="CatalogService">
+    <wsdl:port name="CatalogService" binding="tns:CatalogService">
+      <soap:address location="http://localhost:8080/mrswebservices/CatalogService"/>
+      <!-- DEV -->
+      <!-- <soap:address location="https://10.158.130.219:25027/mrswebservices/CatalogService"/> -->
+      <!-- STAGE -->
+      <!-- <soap:address location="https://10.157.251.57:25027/mrswebservices/CatalogService"/> -->
+    </wsdl:port>
+
+  </wsdl:service>
+</wsdl:definitions>
+

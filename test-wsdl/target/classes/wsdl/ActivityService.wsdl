@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision$ $Date$-->
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://activity.ws.mcrewards.mastercard.com/"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://activity.ws.mcrewards.mastercard.com/"
+                  xmlns:common="http://common.ws.mcrewards.mastercard.com/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+  <wsdl:import location="MrsCommon.wsdl" namespace="http://common.ws.mcrewards.mastercard.com/" />
+
+  <wsdl:types>
+    <s:schema>
+      <s:import schemaLocation="ActivityService.xsd" namespace="http://activity.ws.mcrewards.mastercard.com/" />
+    </s:schema>
+  </wsdl:types>
+
+
+  <!-- MESSAGES -->
+  <wsdl:message name="getRewardSummarySoapIn">
+    <wsdl:part name="parameters" element="tns:getRewardSummary"/>
+  </wsdl:message>
+
+  <wsdl:message name="getRewardSummarySoapOut">
+    <wsdl:part name="parameters" element="tns:getRewardSummaryResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="getAuthorizationsSoapIn">
+    <wsdl:part name="parameters" element="tns:getAuthorizations"/>
+  </wsdl:message>
+
+  <wsdl:message name="getAuthorizationsSoapOut">
+    <wsdl:part name="parameters" element="tns:getAuthorizationsResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="reprocessAuthorizationIn">
+    <wsdl:part name="parameters" element="tns:reprocessAuthorization"/>
+  </wsdl:message>
+
+  <wsdl:message name="reprocessAuthorizationOut">
+    <wsdl:part name="parameters" element="tns:reprocessAuthorizationResponse"/>
+  </wsdl:message>
+  
+  <wsdl:message name="addMappingRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:addMappingRecord"/>
+  </wsdl:message>
+
+  <wsdl:message name="addMappingRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:addMappingRecordResponse"/>
+  </wsdl:message>
+  
+ <wsdl:message name="updateMappingRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:updateMappingRecord"/>
+  </wsdl:message>
+
+  <wsdl:message name="updateMappingRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:updateMappingRecordResponse"/>
+  </wsdl:message>
+  
+  <wsdl:message name="postAuthTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:postAuthTransaction"/>
+  </wsdl:message>
+
+  <wsdl:message name="postAuthTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:postAuthTransactionResponse"/>
+  </wsdl:message>
+  
+  <wsdl:message name="queueAuthTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:queueAuthTransaction"/>
+  </wsdl:message>
+
+  <wsdl:message name="queueAuthTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:queueAuthTransactionResponse"/>
+  </wsdl:message>
+  
+  <wsdl:message name="postClearingTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:postClearingTransaction"/>
+  </wsdl:message>
+
+  <wsdl:message name="postClearingTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:postClearingTransactionResponse"/>
+  </wsdl:message>
+  
+  <!-- PORTS -->
+  <wsdl:portType name="ActivityService">
+    <wsdl:operation name="getRewardSummary">
+      <wsdl:input message="tns:getRewardSummarySoapIn"/>
+      <wsdl:output message="tns:getRewardSummarySoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="getAuthorizations">
+      <wsdl:input message="tns:getAuthorizationsSoapIn"/>
+      <wsdl:output message="tns:getAuthorizationsSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="reprocessAuthorization">
+      <wsdl:input message="tns:reprocessAuthorizationIn"/>
+      <wsdl:output message="tns:reprocessAuthorizationOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    
+    <wsdl:operation name="addMappingRecord">
+      <wsdl:input message="tns:addMappingRecordSoapIn"/>
+      <wsdl:output message="tns:addMappingRecordSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+ 
+    <wsdl:operation name="updateMappingRecord">
+      <wsdl:input message="tns:updateMappingRecordSoapIn"/>
+      <wsdl:output message="tns:updateMappingRecordSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    
+    <wsdl:operation name="postAuthTransaction">
+      <wsdl:input message="tns:postAuthTransactionSoapIn"/>
+      <wsdl:output message="tns:postAuthTransactionSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    
+    <wsdl:operation name="queueAuthTransaction">
+      <wsdl:input message="tns:queueAuthTransactionSoapIn"/>
+      <wsdl:output message="tns:queueAuthTransactionSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+    
+    <wsdl:operation name="postClearingTransaction">
+      <wsdl:input message="tns:postClearingTransactionSoapIn"/>
+      <wsdl:output message="tns:postClearingTransactionSoapOut"/>
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <!-- BINDINGS -->
+  <wsdl:binding name="ActivityService"
+                type="tns:ActivityService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getRewardSummary">
+      <soap:operation
+              soapAction="http://activity.ws.mcrewards.mastercard.com/getRewardSummary"
+              style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getAuthorizations">
+      <soap:operation
+              soapAction="http://activity.ws.mcrewards.mastercard.com/getAuthorizations"
+              style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="reprocessAuthorization">
+      <soap:operation
+              soapAction="http://activity.ws.mcrewards.mastercard.com/reprocessAuthorization"
+              style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    
+    <wsdl:operation name="addMappingRecord">
+      <soap:operation soapAction="http://activity.ws.mcrewards.mastercard.com/addMappingRecord"  style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="updateMappingRecord">
+      <soap:operation soapAction="http://activity.ws.mcrewards.mastercard.com/updateMappingRecord" style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    
+    <wsdl:operation name="postAuthTransaction">
+      <soap:operation soapAction="http://activity.ws.mcrewards.mastercard.com/postAuthTransaction"  style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    
+    <wsdl:operation name="queueAuthTransaction">
+      <soap:operation soapAction="http://activity.ws.mcrewards.mastercard.com/queueAuthTransaction"  style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    
+    <wsdl:operation name="postClearingTransaction">
+      <soap:operation soapAction="http://activity.ws.mcrewards.mastercard.com/postClearingTransaction"  style="document"/>
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+        <soap:fault name="errorResponse" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+  <wsdl:service name="ActivityService">
+    <wsdl:port name="ActivityService" binding="tns:ActivityService">
+      <soap:address location="http://localhost:8080/mrswebservices/ActivityService"/>
+      <!-- DEV -->
+      <!-- <soap:address location="https://10.158.130.219:25027/mrswebservices/ActivityService"/> -->
+      <!-- STAGE -->
+      <!-- <soap:address location="https://10.157.251.57:25027/mrswebservices/ActivityService"/>  -->
+    </wsdl:port>
+
+  </wsdl:service>
+</wsdl:definitions>

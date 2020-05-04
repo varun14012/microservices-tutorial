@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision$ $Date$-->
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://household.ws.mcrewards.mastercard.com/"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:common="http://common.ws.mcrewards.mastercard.com/"
+                  targetNamespace="http://household.ws.mcrewards.mastercard.com/">
+
+  <wsdl:import location="MrsCommon.wsdl" namespace="http://common.ws.mcrewards.mastercard.com/" />
+
+  <wsdl:types>
+    <s:schema>
+      <s:import schemaLocation="HouseholdService.xsd" namespace="http://household.ws.mcrewards.mastercard.com/" />
+    </s:schema>
+  </wsdl:types>
+
+
+  <!-- MESSAGES -->
+  <wsdl:message name="getHHAddValidationQuestionsSoapIn">
+    <wsdl:part name="parameters" element="tns:getHHAddValidationQuestions" />
+  </wsdl:message>
+
+  <wsdl:message name="getHHAddValidationQuestionsSoapOut">
+    <wsdl:part name="parameters" element="tns:getHHAddValidationQuestionsResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="validateCustomerHHAddSoapIn">
+    <wsdl:part name="parameters" element="tns:validateCustomerHHAdd" />
+  </wsdl:message>
+
+  <wsdl:message name="validateCustomerHHAddSoapOut">
+    <wsdl:part name="parameters" element="tns:validateCustomerHHAddResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="updateHouseholdNameSoapIn">
+    <wsdl:part name="parameters" element="tns:updateHouseholdName" />
+  </wsdl:message>
+
+  <wsdl:message name="updateHouseholdNameSoapOut">
+    <wsdl:part name="parameters" element="tns:updateHouseholdNameResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="removeAccountFromHouseholdSoapIn">
+    <wsdl:part name="parameters" element="tns:removeAccountFromHousehold" />
+  </wsdl:message>
+
+  <wsdl:message name="removeAccountFromHouseholdSoapOut">
+    <wsdl:part name="parameters" element="tns:removeAccountFromHouseholdResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="moveAccountToNewHouseholdSoapIn">
+    <wsdl:part name="parameters" element="tns:moveAccountToNewHousehold" />
+  </wsdl:message>
+
+  <wsdl:message name="moveAccountToExistingHouseholdSoapIn">
+    <wsdl:part name="parameters" element="tns:moveAccountToExistingHousehold" />
+  </wsdl:message>
+
+  <wsdl:message name="moveAccountToHouseholdSoapOut">
+    <wsdl:part name="parameters" element="tns:getMoveAccountToHouseholdResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="updateHouseholdRoleSoapIn">
+    <wsdl:part name="parameters" element="tns:updateHouseholdRole" />
+  </wsdl:message>
+
+  <wsdl:message name="updateHouseholdRoleSoapOut">
+    <wsdl:part name="parameters" element="tns:updateHouseholdRoleResponse" />
+  </wsdl:message>
+
+
+  <!-- PORTS -->
+  <wsdl:portType name="HouseholdService">
+    <wsdl:operation name="getHHAddValidationQuestions">
+      <wsdl:input message="tns:getHHAddValidationQuestionsSoapIn" />
+      <wsdl:output message="tns:getHHAddValidationQuestionsSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="validateCustomerHHAdd">
+      <wsdl:input message="tns:validateCustomerHHAddSoapIn" />
+      <wsdl:output message="tns:validateCustomerHHAddSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="removeAccountFromHousehold">
+      <wsdl:input message="tns:removeAccountFromHouseholdSoapIn" />
+      <wsdl:output message="tns:removeAccountFromHouseholdSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="updateHouseholdName">
+      <wsdl:input message="tns:updateHouseholdNameSoapIn" />
+      <wsdl:output message="tns:updateHouseholdNameSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="moveAccountToNewHousehold">
+      <wsdl:input message="tns:moveAccountToNewHouseholdSoapIn" />
+      <wsdl:output message="tns:moveAccountToHouseholdSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="moveAccountToExistingHousehold">
+      <wsdl:input message="tns:moveAccountToExistingHouseholdSoapIn" />
+      <wsdl:output message="tns:moveAccountToHouseholdSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+
+    <wsdl:operation name="updateHouseholdRole">
+      <wsdl:input message="tns:updateHouseholdRoleSoapIn" />
+      <wsdl:output message="tns:updateHouseholdRoleSoapOut" />
+      <wsdl:fault name="errorResponse" message="common:mrsErrorResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+
+
+  <!-- BINDINGS -->
+  <wsdl:binding name="HouseholdService" type="tns:HouseholdService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+
+    <wsdl:operation name="getHHAddValidationQuestions">
+      <soap:operation
+              soapAction="http://household.ws.mcrewards.mastercard.com/getHHAddValidationQuestions"
+              style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="validateCustomerHHAdd">
+      <soap:operation
+              soapAction="http://household.ws.mcrewards.mastercard.com/validateCustomerHHAdd"
+              style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="removeAccountFromHousehold">
+      <soap:operation
+              soapAction="http://household.ws.mcrewards.mastercard.com/removeAccountFromHousehold"
+              style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="updateHouseholdName">
+      <soap:operation
+              soapAction="http://household.ws.mcrewards.mastercard.com/updateHouseholdName"
+              style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="moveAccountToNewHousehold">
+      <soap:operation
+              soapAction="http://household.ws.mcrewards.mastercard.com/moveAccountToNewHousehold"
+              style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="moveAccountToExistingHousehold">
+      <soap:operation
+              soapAction="http://household.ws.mcrewards.mastercard.com/moveAccountToExistingHousehold"
+              style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="updateHouseholdRole">
+      <soap:operation
+              soapAction="http://household.ws.mcrewards.mastercard.com/updateHouseholdRole"
+              style="document" />
+      <wsdl:input>
+        <soap:header message="common:identity" part="identity" use="literal"/>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="errorResponse">
+          <soap:fault name="errorResponse" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="HouseholdService">
+    <wsdl:port name="HouseholdService" binding="tns:HouseholdService">
+      <soap:address location="http://localhost:8080/mrswebservices/HouseholdService" />
+      <!-- DEV -->
+      <!-- <soap:address location="https://10.158.130.219:25027/mrswebservices/HouseholdService"/> -->
+      <!-- STAGE -->
+      <!-- <soap:address location="https://10.157.251.57:25027/mrswebservices/HouseholdService"/>  -->
+      <!-- STAGE instance #2-->
+      <!-- <soap:address location="https://10.157.251.57:25027/mrswebservices_v2/HouseholdService"/>  -->
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

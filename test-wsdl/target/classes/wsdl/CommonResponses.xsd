@@ -1,0 +1,72 @@
+<!-- $Revision$  $Date$ -->
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://common.ws.mcrewards.mastercard.com/"
+           xmlns:tns="http://common.ws.mcrewards.mastercard.com/"
+           elementFormDefault="qualified">
+
+  <xs:complexType name="SuccessResp">
+    <xs:sequence>
+      <xs:element name="success" minOccurs="1" type="xs:boolean" default="true"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="ErrorResp">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="code" type="xs:string"/>
+        <xs:element name="description" type="xs:string"/>
+        <xs:element name="item" minOccurs="0" type="xs:string"/>
+        <xs:element name="type" minOccurs="0" type="xs:string"/>
+        <xs:element name="recoverable" minOccurs="0" type="xs:boolean"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="AdditionalDetails" type="tns:HashStringElement" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="HashStringElement">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fieldName" type="xs:string" />
+      <xs:element minOccurs="0" name="data" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+   <xs:complexType name="ValidationQuestion">
+     <xs:sequence>
+       <xs:element minOccurs="0" maxOccurs="1" name="question" type="xs:string" />
+       <xs:element minOccurs="0" maxOccurs="1" name="code" type="xs:string" />
+     </xs:sequence>
+   </xs:complexType>
+
+  <xs:element name="appID" type="xs:string"/>
+  <xs:element name="institutionName" type="xs:string"/>
+
+  <xs:element name="identity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="appID" type="xs:string"/>
+        <xs:element name="institutionName" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="emptyElement">
+    <xs:sequence />
+  </xs:complexType>
+
+  <xs:simpleType name="BooleanYesNo">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Y" />
+      <xs:enumeration value="N" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="encryptedField">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="encrypted" type="xs:boolean" default="false" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+</xs:schema>
