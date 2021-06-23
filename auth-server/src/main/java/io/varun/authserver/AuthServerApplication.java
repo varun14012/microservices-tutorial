@@ -2,14 +2,18 @@ package io.varun.authserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-@EnableEurekaClient
+//@EnableEurekaClient
 public class AuthServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuthServerApplication.class, args);
+//		SpringApplication.run(AuthServerApplication.class, args);
+
+		SpringApplication application = new SpringApplication(AuthServerApplication.class);
+		InitializeFirebase initializeFirebase = new InitializeFirebase();
+		initializeFirebase.init();
+		application.run(args);
 	}
 
 }

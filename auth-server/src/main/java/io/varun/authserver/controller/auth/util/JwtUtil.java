@@ -8,6 +8,9 @@ import java.util.function.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -41,6 +44,28 @@ public class JwtUtil {
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 		return createToken(claims, userDetails.getUsername());
+	}
+
+	public String generateCustomToken(UserDetails userDetails) {
+		Map<String, Object> claims = new HashMap<>();
+		return createCustomToken();
+	}
+
+	private String createCustomToken() {
+
+		try {
+			String uid = "dummy@gmail.com";
+			Map<String, Object> additionalClaims = new HashMap<String, Object>();
+			additionalClaims.put("premiumAccount", true);
+
+			String customToken = FirebaseAuth.getInstance().createCustomToken(uid, additionalClaims);
+
+			return customToken;
+		} catch (FirebaseAuthException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private String createToken(Map<String, Object> claims, String subject) {
