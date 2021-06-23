@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class ChatController {
+	// https://spring.io/guides/gs/messaging-stomp-websocket/
 
 	@MessageMapping("/chat")
 	@SendTo("/topic/messages")
