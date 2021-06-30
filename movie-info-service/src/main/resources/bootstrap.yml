@@ -1,0 +1,10 @@
+#spring:application:name:a-bootiful-client
+# N:B: this is the default:
+spring:
+    application:
+             name: movie-info-service
+    cloud:
+       config:
+        enabled: true
+        uri: http://localhost:8888
+        label: main
