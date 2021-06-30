@@ -7,7 +7,7 @@ spring:
       config:
           server: 
               git:
-                uri: F:\\Projects\\microservices\\config-server-repo
+                uri: https://github.com/varun14012/config-server.git
                 cloneOnStart: true
 #                skipSslValidation: true
 #                username: varun14012
