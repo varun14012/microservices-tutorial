@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
 import io.varun.moviecatalogservice.model.CatalogItem;
 import io.varun.moviecatalogservice.model.Movie;
@@ -32,19 +31,43 @@ public class CatalogController {
 //	WebClient.Builder webClientBuilder;
 
 	@RequestMapping("/{user_id}")
-	@HystrixCommand(fallbackMethod = "fallbackMethod", commandProperties = {
-			@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
-			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
-			@HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50"),
-			@HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000") }, threadPoolProperties = {
-					@HystrixProperty(name = "coreSize", value = "30"),
-					@HystrixProperty(name = "maximumSize", value = "35"),
-					@HystrixProperty(name = "allowMaximumSizeToDivergeFromCoreSize", value = "true"),
-					@HystrixProperty(name = "maxQueueSize", value = "101"),
-					@HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
-					@HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "12"),
-					@HystrixProperty(name = "queueSizeRejectionThreshold", value = "15"),
-					@HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "1440") })
+	@HystrixCommand(fallbackMethod = "fallbackMethod"/*
+														 * , commandProperties = {
+														 * 
+														 * @HystrixProperty(name =
+														 * "execution.isolation.thread.timeoutInMilliseconds", value =
+														 * "2000"),
+														 * 
+														 * @HystrixProperty(name =
+														 * "circuitBreaker.requestVolumeThreshold", value = "5"),
+														 * 
+														 * @HystrixProperty(name =
+														 * "circuitBreaker.errorThresholdPercentage", value = "50"),
+														 * 
+														 * @HystrixProperty(name =
+														 * "circuitBreaker.sleepWindowInMilliseconds", value = "5000")
+														 * }, threadPoolProperties = {
+														 * 
+														 * @HystrixProperty(name = "coreSize", value = "30"),
+														 * 
+														 * @HystrixProperty(name = "maximumSize", value = "35"),
+														 * 
+														 * @HystrixProperty(name =
+														 * "allowMaximumSizeToDivergeFromCoreSize", value = "true"),
+														 * 
+														 * @HystrixProperty(name = "maxQueueSize", value = "101"),
+														 * 
+														 * @HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
+														 * 
+														 * @HystrixProperty(name = "metrics.rollingStats.numBuckets",
+														 * value = "12"),
+														 * 
+														 * @HystrixProperty(name = "queueSizeRejectionThreshold", value
+														 * = "15"),
+														 * 
+														 * @HystrixProperty(name =
+														 * "metrics.rollingStats.timeInMilliseconds", value = "1440") }
+														 */)
 
 	public List<CatalogItem> getCatalog(@PathVariable("user_id") String userId) {
 
